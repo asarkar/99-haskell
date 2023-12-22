@@ -1,0 +1,61 @@
+name:                ninety-nine-haskell
+version:             1.0.0
+github:              "asarkar/99-haskell"
+# https://spdx.org/licenses/
+license:             "Apache-2.0"
+author:              "Abhijit Sarkar"
+maintainer:          "contact@asarkar.com"
+copyright:           "2023 Abhijit Sarkar"
+
+extra-source-files:
+- README.md
+- LICENSE
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/asarkar/udemy-complete-haskell#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -XTupleSections
+- -Werror
+# For details on warnings: https://downloads.haskell.org/~ghc/master/users-guide/using-warnings.html
+# This list originally taken from https://medium.com/mercury-bank/enable-all-the-warnings-a0517bc081c3
+# Enable all warnings with -Weverything, then disable the ones we don’t care about
+- -Weverything
+- -Wno-missing-import-lists  # Requires explicit imports of _every_ function (e.g. ‘$’); too strict
+- -Wno-missed-specializations  # When GHC can’t specialize a polymorphic function. No big deal and requires fixing underlying libraries to solve.
+- -Wno-all-missed-specializations  # See missed-specialisations
+- -Wno-missing-local-signatures  # Warning for polymorphic local bindings; nothing wrong with those.
+- -Wno-monomorphism-restriction  # Don’t warn if the monomorphism restriction is used.
+- -Wno-missing-safe-haskell-mode  # Never heard of it.
+- -Wno-safe
+- -Wno-unsafe
+- -Wno-implicit-prelude  # In most cases, we want Prelude implicitly imported.
+- -Wno-prepositive-qualified-module
+- -Wno-missing-kind-signatures
+- -Wno-unused-top-binds
+- -Wno-missing-export-lists
+# - -fprint-potential-instances
+
+library:
+  source-dirs: src
+  dependencies:
+  - random
+  - array
+
+tests:
+  udemy-complete-haskell-test:
+    defaults: hspec/hspec@main
+    dependencies:
+    - ninety-nine-haskell
+    - QuickCheck
+    - containers
+    - split

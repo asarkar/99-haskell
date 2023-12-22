@@ -1,0 +1,25 @@
+name: CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 'Install Stack'
+        uses: haskell-actions/setup@v2
+        with:
+          enable-stack: true
+
+      - name: 'Install HLint'
+        uses: haskell-actions/hlint-setup@v2
+
+      - name: 'Check Formatting'
+        uses: haskell-actions/run-ormolu@v14
+        with:
+          mode: check
+
+      - name: 'Test and Lint'
+        run: .github/run.sh

@@ -1,0 +1,65 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.36.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           ninety-nine-haskell
+version:        1.0.0
+description:    Please see the README on GitHub at <https://github.com/asarkar/udemy-complete-haskell#readme>
+homepage:       https://github.com/asarkar/99-haskell#readme
+bug-reports:    https://github.com/asarkar/99-haskell/issues
+author:         Abhijit Sarkar
+maintainer:     contact@asarkar.com
+copyright:      2023 Abhijit Sarkar
+license:        Apache-2.0
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    LICENSE
+
+source-repository head
+  type: git
+  location: https://github.com/asarkar/99-haskell
+
+library
+  exposed-modules:
+      Lists
+      Lists2
+      Lists3
+      Tree
+  other-modules:
+      Paths_ninety_nine_haskell
+  hs-source-dirs:
+      src
+  ghc-options: -XTupleSections -Werror -Weverything -Wno-missing-import-lists -Wno-missed-specializations -Wno-all-missed-specializations -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-safe-haskell-mode -Wno-safe -Wno-unsafe -Wno-implicit-prelude -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-unused-top-binds -Wno-missing-export-lists
+  build-depends:
+      array
+    , base >=4.7 && <5
+    , random
+  default-language: Haskell2010
+
+test-suite udemy-complete-haskell-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      GenLists
+      Lists2Spec
+      Lists3Spec
+      ListsSpec
+      SpecHook
+      TreeSpec
+      Paths_ninety_nine_haskell
+  hs-source-dirs:
+      test
+  ghc-options: -XTupleSections -Werror -Weverything -Wno-missing-import-lists -Wno-missed-specializations -Wno-all-missed-specializations -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-safe-haskell-mode -Wno-safe -Wno-unsafe -Wno-implicit-prelude -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-unused-top-binds -Wno-missing-export-lists
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+    , containers
+    , hspec ==2.*
+    , ninety-nine-haskell
+    , split
+  default-language: Haskell2010
+  build-tool-depends: hspec-discover:hspec-discover == 2.*

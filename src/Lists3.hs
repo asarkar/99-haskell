@@ -60,18 +60,22 @@ rndPerm' xs = randomElems n n xs
     n = length xs
 
 -- Problem 25: Generate a random permutation of the elements of a list.
--- Alternative imperative solution.
+
+{-
+ANSWER: Alternative imperative solution.
+
+https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+
+We iterate n times, and at each iteration read a random
+element arr[j], where i <= j <= n, and overwrite it with
+the current element arr[i].
+We then return arr[j], which becomes the i-th element of
+the output array. Note that there's no need to write
+arr[j] at index i, since it is never visited again.
+-}
 rndPerm :: [a] -> IO [a]
 rndPerm xs = do
   arr <- newArray xs
-  -- https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
-  --
-  -- We iterate n times, and at each iteration read a random
-  -- element arr[j], where i <= j <= n, and overwrite it with
-  -- the current element arr[i].
-  -- We then return arr[j], which becomes the i-th element of
-  -- the output array. Note that there's no need to write
-  -- arr[j] at index i, since it is never visited again.
 
   M.forM [1 .. n] $ \i -> do
     j <- R.randomRIO (i, n)
@@ -84,7 +88,7 @@ rndPerm xs = do
     newArray :: [a] -> IO (IOArray Int a)
     newArray = AIO.newListArray (1, n)
 
--- Problem 26: Generate the combinations of K distinct
+-- Problem 26: (**) Generate the combinations of K distinct
 -- objects chosen from the N elements of a list.
 combinations :: Int -> [a] -> [[a]]
 combinations 0 _ = return []
@@ -93,17 +97,21 @@ combinations n xs = do
   zs <- combinations (n - 1) ys
   return (y : zs)
 
--- Problem 27a: In how many ways can a group of 9 people
--- work in 3 disjoint subgroups of 2, 3 and 4 persons?
--- Write a function that generates all the possibilities
--- and returns them in a list.
+{-
+Problem 27a: In how many ways can a group of 9 people
+work in 3 disjoint subgroups of 2, 3 and 4 persons?
+Write a function that generates all the possibilities
+and returns them in a list.
+-}
 group3 :: (Eq a) => [a] -> [[[a]]]
 group3 = group [2 .. 4]
 
--- Problem 27b: In how many ways can a group of 9 people
--- work in disjoint subgroups of the given sizes?
--- Write a function that generates all the possibilities
--- and returns them in a list.
+{-
+Problem 27b: In how many ways can a group of 9 people
+work in disjoint subgroups of the given sizes?
+Write a function that generates all the possibilities
+and returns them in a list.
+-}
 group :: (Eq a) => [Int] -> [a] -> [[[a]]]
 group [] _ = []
 group [_] xs = [[xs]]

@@ -3,7 +3,7 @@ module Lists3Spec (spec) where
 import qualified Control.Exception.Base as B
 import qualified Data.List as L
 import qualified Data.Set as S
-import GenLists
+import GenList
 import Lists3
 import Test.Hspec
 import Test.Hspec.QuickCheck

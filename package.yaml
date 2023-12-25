@@ -22,6 +22,7 @@ description:         Please see the README on GitHub at <https://github.com/asar
 
 dependencies:
 - base >= 4.7 && < 5
+- split
 
 ghc-options:
 - -XTupleSections
@@ -58,4 +59,3 @@ tests:
     - ninety-nine-haskell
     - QuickCheck
     - containers
-    - split

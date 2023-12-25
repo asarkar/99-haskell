@@ -1,4 +1,4 @@
-module GenLists where
+module GenList where
 
 import qualified Control.Monad as M
 import Test.QuickCheck

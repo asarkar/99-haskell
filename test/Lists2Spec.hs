@@ -2,7 +2,7 @@ module Lists2Spec (spec) where
 
 import qualified Data.List as L
 import qualified Data.List.Split as LS
-import GenLists
+import GenList
 import Lists2
 import Test.Hspec
 import Test.Hspec.QuickCheck

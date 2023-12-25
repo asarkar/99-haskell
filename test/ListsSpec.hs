@@ -1,7 +1,7 @@
 module ListsSpec (spec) where
 
 import qualified Data.List as L
-import GenLists
+import GenList
 import Lists
 import Test.Hspec
 import Test.Hspec.QuickCheck

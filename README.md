@@ -14,9 +14,9 @@
 
 * Questions 46 to 50: Logic and codes
 
-* Questions 54A to 60: Binary trees
+* Questions 54A to 60: [Binary trees](src/BinaryTrees.hs)
 
-* Questions 61 to 69: Binary trees, continued
+* Questions 61 to 69: [Binary trees, continued](src/BinaryTrees2.hs)
 
 * Questions 70B to 73: Multiway trees
 

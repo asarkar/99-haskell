@@ -2,11 +2,12 @@
 
 module BinaryTrees2 where
 
-import qualified BinaryTreeParser as P
+import BinaryTree (Tree (..))
+import Control.Applicative ((<|>))
 import qualified DList as D
-import qualified Data.List as L
 import qualified Data.List.Split as LS
-import Tree (Tree (..))
+import Parser (Parser (..))
+import qualified Parser as P
 
 -- Problem 61: Count the leaves of a binary tree.
 countLeaves :: Tree a -> Int
@@ -171,16 +172,42 @@ Finally, combine the two predicates in a single predicate
 which can be used in both directions.
 -}
 
+type TreeParser = Parser (Tree Char)
+
+branch :: TreeParser
+branch = do
+  x <- P.letter
+  left <- P.open *> binaryTree <* P.comma
+  right <- binaryTree <* P.close
+  return $ Branch x left right
+
+emptyTree :: TreeParser
+emptyTree = pure Empty
+
+singleton :: TreeParser
+singleton = do
+  x <- P.letter
+  return $ Branch x Empty Empty
+
+binaryTree :: TreeParser
+binaryTree = branch <|> singleton <|> emptyTree
+
 stringToTree :: String -> Tree Char
-stringToTree = fst . head . P.parse P.tree
+stringToTree = fst . head . P.parse binaryTree
 
 treeToString :: Tree Char -> String
-treeToString Empty = ""
-treeToString (Branch x Empty Empty) = [x]
-treeToString (Branch x l r) =
-  L.intercalate
-    ""
-    [[x], "(", treeToString l, ",", treeToString r, ")"]
+treeToString = D.toList . go D.empty
+  where
+    go acc Empty = acc
+    go acc (Branch x Empty Empty) = acc D.++ D.singleton x
+    go acc (Branch x l r) =
+      acc
+        D.++ D.singleton x
+        D.++ D.singleton '('
+        D.++ go D.empty l
+        D.++ D.singleton ','
+        D.++ go D.empty r
+        D.++ D.singleton ')'
 
 {-
 Problem 68: Preorder and inorder sequences of binary trees.
@@ -243,16 +270,13 @@ branch ::= letter tree tree
 empty ::= '.'
 letter ::= 'a' ... 'z'
 -}
-tree2ds :: Tree Char -> [Char]
+tree2ds :: Tree Char -> String
 tree2ds = D.toList . go
   where
     go Empty = D.singleton '.'
-    go (Branch x l r) =
-      D.append
-        (D.singleton x)
-        (D.append (go l) (go r))
+    go (Branch x l r) = D.singleton x D.++ go l D.++ go r
 
-ds2tree :: [Char] -> Tree Char
+ds2tree :: String -> Tree Char
 ds2tree = fst . go
   where
     go [] = (Empty, "")

@@ -1,9 +1,9 @@
 module BinaryTreesSpec (spec) where
 
+import BinaryTree (Tree (..), fromList)
 import BinaryTrees
 import qualified Control.Monad as M
 import Test.Hspec
-import Tree (Tree (..), fromList)
 
 spec :: Spec
 spec = do

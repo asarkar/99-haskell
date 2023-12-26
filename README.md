@@ -18,7 +18,7 @@
 
 * Questions 61 to 69: [Binary trees, continued](src/BinaryTrees2.hs)
 
-* Questions 70B to 73: Multiway trees
+* Questions 70B to 73: [Multiway trees](src/MultiwayTrees.hs)
 
 * Questions 80 to 89: Graphs
 

@@ -2,7 +2,7 @@
 
 {-# OPTIONS -Wno-incomplete-uni-patterns -Wno-incomplete-patterns #-}
 
-module Tree (Tree (..), fromList, toList) where
+module BinaryTree (Tree (..), fromList, toList) where
 
 import qualified Data.Char as C
 import qualified Data.List as L

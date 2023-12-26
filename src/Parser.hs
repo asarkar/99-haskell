@@ -3,11 +3,11 @@
 
 {-# OPTIONS -Wno-incomplete-patterns #-}
 
-module BinaryTreeParser (parse, tree) where
+module Parser where
 
 import Control.Applicative (Alternative, empty, (<|>))
+import qualified Control.Applicative as A
 import qualified Data.Char as C
-import Tree (Tree (..))
 
 {-
 tree ::= branch | singleton | empty
@@ -93,22 +93,7 @@ close = sat (== ')')
 comma :: Parser Char
 comma = sat (== ',')
 
-type TreeParser = Parser (Tree Char)
-
-branch :: TreeParser
-branch = do
-  x <- letter
-  left <- open *> tree <* comma
-  right <- tree <* close
-  return $ Branch x left right
-
-emptyTree :: TreeParser
-emptyTree = pure Empty
-
-singleton :: TreeParser
-singleton = do
-  x <- letter
-  return $ Branch x Empty Empty
-
-tree :: TreeParser
-tree = branch <|> singleton <|> emptyTree
+space :: Parser ()
+space = do
+  _ <- A.many (sat C.isSpace)
+  return ()

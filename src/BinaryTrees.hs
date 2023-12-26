@@ -1,10 +1,8 @@
 module BinaryTrees where
 
-import Tree (Tree (..))
+import BinaryTree (Tree (..))
 
-{-
-Problem 54A: (*) Check whether a given term represents a binary tree.
--}
+-- Problem 54A: (*) Check whether a given term represents a binary tree.
 -- ANSWER: Creating an invalid tree is not possible in Haskell.
 
 {-

@@ -5,12 +5,12 @@
 
 module BinaryTrees2Spec (spec) where
 
+import BinaryTree (Tree (..), fromList)
 import BinaryTrees2
-import GenTree
+import GenBinaryTree
 import Test.Hspec
 import Test.Hspec.QuickCheck
 import Test.QuickCheck
-import Tree (Tree (..), fromList)
 
 {- ORMOLU_DISABLE -}
 tree4 :: Tree Int
@@ -140,23 +140,20 @@ spec = do
   --                       Empty
   --               )
 
+  describe "stringToTree" $ do
+    it "constructs a binary tree from a string" $ do
+      let tree = fromList head ["x", "y", "a", "null", "null", "null", "b"]
+      stringToTree "x(y,a(,b))" `shouldBe` tree
+
+  describe "treeToString" $ do
+    it "converts a binary tree to a string" $ do
+      let t1 = fromList head ["x", "y", "a", "null", "null", "null", "b"]
+      treeToString t1 `shouldBe` "x(y,a(,b))"
+
+      let t2 = fromList head ["a", "a"]
+      treeToString t2 `shouldBe` "a(a,)"
+
   describe "to and from tree" $ do
-    -- it "stringToTree is the inverse of treeToString" $ do
-      -- let t1 = fromList head ["x", "y", "a", "null", "null", "null", "b"]
-      -- stringToTree (treeToString t1) `shouldBe` t1
-
-      -- let t2 = fromList head 
-      --            [
-      --               "x","y","a","c","d","null",
-      --               "b","null","null","f","null",
-      --               "null","null","g","h"
-      --            ]
-      -- stringToTree (treeToString t2) `shouldBe` t2
-
-    -- it "ds2tree is the inverse of tree2ds" $ do
-    --   let tree = fromList head ["x","y","z", "null", "null", "0"]
-    --   ds2tree (tree2ds tree) `shouldBe` tree
-
     -- \t -> conjoin [
     --   counterexample "stringToTree is the inverse of treeToString" $ prop_stringToTree t,
     --   counterexample "ds2tree is the inverse of tree2ds" $ prop_ds2tree t]

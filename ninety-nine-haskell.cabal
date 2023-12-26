@@ -25,14 +25,15 @@ source-repository head
 
 library
   exposed-modules:
-      BinaryTreeParser
+      BinaryTree
       BinaryTrees
       BinaryTrees2
       DList
       Lists
       Lists2
       Lists3
-      Tree
+      MultiwayTrees
+      Parser
   other-modules:
       Paths_ninety_nine_haskell
   hs-source-dirs:
@@ -50,14 +51,16 @@ test-suite udemy-complete-haskell-test
   main-is: Spec.hs
   other-modules:
       BinaryTrees2Spec
+      BinaryTreeSpec
       BinaryTreesSpec
+      GenBinaryTree
       GenList
-      GenTree
+      GenMultiwayTree
       Lists2Spec
       Lists3Spec
       ListsSpec
+      MultiwayTreesSpec
       SpecHook
-      TreeSpec
       Paths_ninety_nine_haskell
   hs-source-dirs:
       test

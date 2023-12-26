@@ -3,12 +3,12 @@
 -- where Char is not a type variable.
 {-# LANGUAGE FlexibleInstances #-}
 
-module TreeSpec (spec) where
+module BinaryTreeSpec (spec) where
 
-import GenTree
+import BinaryTree (Tree (..), fromList, toList)
+import GenBinaryTree
 import Test.Hspec
 import Test.QuickCheck
-import Tree (Tree (..), fromList, toList)
 
 leaf :: a -> Tree a
 leaf x = Branch x Empty Empty

@@ -12,11 +12,11 @@ singleton = DList . (:)
 
 -- O(n)
 fromList :: [a] -> DList a
-fromList = DList . (++)
+fromList = DList . (Prelude.++)
 
 -- O(1)
-append :: DList a -> DList a -> DList a
-append (DList d1) (DList d2) = DList (d1 . d2)
+(++) :: DList a -> DList a -> DList a
+(++) (DList d1) (DList d2) = DList (d1 . d2)
 
 -- O(1)
 toList :: DList a -> [a]

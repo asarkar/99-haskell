@@ -14,6 +14,10 @@ data Tree a = Branch a (Tree a) (Tree a) | Empty
 instance (Show a) => Show (Tree a) where
   show = drawTree
 
+{-
+Builds a tree in level order, where empty nodes are represented
+by the string "null" in the input list.
+-}
 fromList :: (Show a) => (String -> a) -> [String] -> Tree a
 fromList _ [] = Empty
 fromList f xs = T.trace ("\n" ++ show xs ++ " ==> \n" ++ drawTree tree) tree

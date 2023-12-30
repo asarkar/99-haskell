@@ -23,6 +23,7 @@ description:         Please see the README on GitHub at <https://github.com/asar
 dependencies:
 - base >= 4.7 && < 5
 - split
+- containers
 
 ghc-options:
 - -XTupleSections
@@ -51,6 +52,9 @@ library:
   dependencies:
   - random
   - array
+  - mtl
+  - psqueues
+  - hashable
 
 tests:
   udemy-complete-haskell-test:
@@ -58,4 +62,3 @@ tests:
     dependencies:
     - ninety-nine-haskell
     - QuickCheck
-    - containers

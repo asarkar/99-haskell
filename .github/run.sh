@@ -38,8 +38,14 @@ args=( "${@/#/\"}" )
 args=( "${args[@]/%/\"}" )
 
 if (( no_test == 0 )); then
-		# profiling https://stackoverflow.com/a/40922201/839733
-		stack test $stack_opts --ta "${args[*]}"
+    # Try GHCup first.
+    stack_path="$HOME/.ghcup/bin/stack"
+    if [[ ! -x "$(command -v "$stack_path")" ]]; then
+	  stack_path=stack
+	fi
+	  
+	# profiling https://stackoverflow.com/a/40922201/839733
+	"$stack_path" test $stack_opts --ta "${args[*]}"
 fi
 
 if (( no_lint == 0 )); then

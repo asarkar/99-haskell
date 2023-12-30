@@ -29,6 +29,7 @@ library
       BinaryTrees
       BinaryTrees2
       DList
+      Graphs
       Lists
       Lists2
       Lists3
@@ -42,6 +43,10 @@ library
   build-depends:
       array
     , base >=4.7 && <5
+    , containers
+    , hashable
+    , mtl
+    , psqueues
     , random
     , split
   default-language: Haskell2010
@@ -56,6 +61,7 @@ test-suite udemy-complete-haskell-test
       GenBinaryTree
       GenList
       GenMultiwayTree
+      GraphsSpec
       Lists2Spec
       Lists3Spec
       ListsSpec

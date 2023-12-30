@@ -20,7 +20,7 @@
 
 * Questions 70B to 73: [Multiway trees](src/MultiwayTrees.hs)
 
-* Questions 80 to 89: Graphs
+* Questions 80 to 89: [Graphs](src/Graphs.hs)
 
 * Questions 90 to 94: Miscellaneous problems
 

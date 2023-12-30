@@ -35,6 +35,7 @@ cbalTree = map fst . build
             5. do notation
             6. Bind -- xs >>= (\x -> ys >>= (\y -> (x, y)))
             7. Bind pointfree (ys >>=) . (,) =<< xs
+            8. Using MonadPlus -- xs `mplus` ys
           -}
           (l, i) <- build k
           (r, j) <- build (n - k - 1)
@@ -118,5 +119,5 @@ hbalTree x n
 {-
 Problem 60: (***) Construct height-balanced binary trees with a given number of nodes.
 
-TODO.
+ANSWER: TODO.
 -}

@@ -16,7 +16,8 @@ module Graphs
   )
 where
 
-import Control.Monad as M
+import Control.Monad ((<=<))
+import qualified Control.Monad as M
 import qualified Control.Monad.State as S
 import qualified Data.Bifunctor as Bf
 import qualified Data.HashPSQ as Q
@@ -147,7 +148,8 @@ spanningTrees edges = concatMap go $ vertices ug
 {-
 Problem 84: (**) Construct the minimal spanning trees.
 
-ANSWER: Prim's eager MST algorithm.
+ANSWER: We use Prim's eager MST algorithm.
+
 https://www.youtube.com/watch?v=xq3ABa-px_g
 
 - Maintain a min Indexed Priority Queue (IPQ) of size V
@@ -229,6 +231,8 @@ if and only if f(X) and f(Y) are adjacent.
 Write a predicate that determines whether two graphs are isomorphic.
 
 ANSWER:
+We apply the Weisfeiler Leman graph isomorphism test.
+
 https://davidbieber.com/post/2019-05-10-weisfeiler-lehman-isomorphism-test/
 
 https://en.wikipedia.org/wiki/Weisfeiler_Leman_graph_isomorphism_test
@@ -378,7 +382,7 @@ dfs g vs0 = S.evalState (go vs0) Set.empty
         else do
           S.modify (Set.insert v)
           let adjacent = neighbors g v
-          xs <- join <$> go adjacent
+          xs <- M.join <$> go adjacent
           ys <- go vs
           return $ (v : xs) : ys
 

@@ -22,9 +22,9 @@
 
 * Questions 80 to 89: [Graphs](src/Graphs.hs)
 
-* Questions 90 to 94: Miscellaneous problems
+* Questions 90 to 94: [Miscellaneous problems](src/Misc.hs)
 
-* Questions 95 to 99: Miscellaneous problems, continued
+* Questions 95 to 99: [Miscellaneous problems, continued](src/Misc2.hs)
 
 (Though the problems number from 1 to 99, there are some gaps and some additions marked with letters. There are actually only 88 problems.)
 

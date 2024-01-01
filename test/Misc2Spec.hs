@@ -1,5 +1,6 @@
 module Misc2Spec (spec) where
 
+import qualified Control.Monad as M
 import Misc2
 import Test.Hspec
 
@@ -13,15 +14,19 @@ spec = do
 
   describe "isIdentifier" $ do
     it "checks whether a given string is a legal identifier" $ do
-      isIdentifier "" `shouldBe` False
-      isIdentifier "a" `shouldBe` True
-      isIdentifier "a1" `shouldBe` True
-      isIdentifier "this_is_a_long_identifier" `shouldBe` True
-      isIdentifier "This_ends_in_an_underscore_" `shouldBe` False
-      isIdentifier "This__has__two__consecutive__underscores" `shouldBe` False
-      isIdentifier "1234" `shouldBe` False
-      isIdentifier "_legal_in_many_other_languages" `shouldBe` False
-      isIdentifier "Fibonacci_sequence_is_1_1_2_3_5_8_13_21_ad_infinitum" `shouldBe` True
+      let xs =
+            [ ("", False),
+              ("a", True),
+              ("a1", True),
+              ("this_is_a_long_identifier", True),
+              ("This_ends_in_an_underscore_", False),
+              ("This__has__two__consecutive__underscores", False),
+              ("1234", False),
+              ("_legal_in_many_other_languages", False),
+              ("Fibonacci_sequence_is_1_1_2_3_5_8_13_21_ad_infinitum", True)
+            ]
+      M.forM_ xs $ \(s, valid) ->
+        isIdentifier s `shouldBe` valid
 
   describe "sudoku" $ do
     it "solves a Sudoku puzzle" $ do
@@ -51,19 +56,19 @@ spec = do
   describe "crossword" $ do
     it "solves a Crossword puzzle" $ do
       let board =
-            [ ['.', '.', ' ', '.', '.'],
-              ['.', '.', ' ', '.', '.'],
-              [' ', ' ', ' ', ' ', ' '],
-              ['.', '.', ' ', '.', ' '],
-              ['.', '.', ' ', '.', ' '],
-              ['.', '.', '.', '.', ' ']
+            [ ".. ..",
+              ".. ..",
+              "     ",
+              ".. . ",
+              ".. . ",
+              ".... "
             ]
 
       crossword ["ALPHA", "ARES", "POPPY"] board
-        `shouldBe` [ ['.', '.', 'P', '.', '.'],
-                     ['.', '.', 'O', '.', '.'],
-                     ['A', 'L', 'P', 'H', 'A'],
-                     ['.', '.', 'P', '.', 'R'],
-                     ['.', '.', 'Y', '.', 'E'],
-                     ['.', '.', '.', '.', 'S']
+        `shouldBe` [ "..P..",
+                     "..O..",
+                     "ALPHA",
+                     "..P.R",
+                     "..Y.E",
+                     "....S"
                    ]

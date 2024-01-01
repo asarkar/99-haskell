@@ -10,7 +10,7 @@
 
 * Questions 21 to 28: [Lists again](src/Lists3.hs)
 
-* Questions 31 to 41: Arithmetic
+* Questions 31 to 41: [Arithmetic](src/Arithmetic.hs)
 
 * Questions 46 to 50: Logic and codes
 

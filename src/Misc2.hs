@@ -89,14 +89,15 @@ error state (modeled by Nothing in code).
 data ParserState = Begin | S1 | S2 | S3 | S4 | End
 
 parseId :: ParserState -> String -> Maybe (ParserState, String)
-parseId Begin (x : xs) = if C.isLetter x then Just (S1, xs) else Nothing
-parseId S1 "" = Just (End, "")
-parseId S1 xs = Just (S2, xs)
-parseId S2 (x : xs) = if x == '_' then Just (S3, xs) else Just (S3, x : xs)
-parseId S3 (x : xs) = if C.isLetter x || C.isDigit x then Just (S4, xs) else Nothing
-parseId S4 "" = Just (End, "")
-parseId S4 xs = Just (S2, xs)
-parseId _ _ = Nothing
+parseId s xs = case (s, xs) of
+  (Begin, x : ys) -> if C.isLetter x then Just (S1, ys) else Nothing
+  (S1, "") -> Just (End, "")
+  (S1, ys) -> Just (S2, ys)
+  (S2, x : ys) -> if x == '_' then Just (S3, ys) else Just (S3, x : ys)
+  (S3, x : ys) -> if C.isLetter x || C.isDigit x then Just (S4, ys) else Nothing
+  (S4, "") -> Just (End, "")
+  (S4, ys) -> Just (S2, ys)
+  (_, _) -> Nothing
 
 isIdentifier :: String -> Bool
 isIdentifier = go Begin
@@ -209,7 +210,7 @@ be faster.
 - Another improvement (?) could be to find the sites and match them with words of similar
   lengths.
 -}
-crossword :: [String] -> [[Char]] -> [[Char]]
+crossword :: [String] -> [String] -> [String]
 crossword words' grid = (V.toList . V.map VU.toList) (Mb.fromJust soln)
   where
     soln = solve 0 0 words' initialBoard

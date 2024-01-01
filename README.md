@@ -12,7 +12,7 @@
 
 * Questions 31 to 41: [Arithmetic](src/Arithmetic.hs)
 
-* Questions 46 to 50: Logic and codes
+* Questions 46 to 50: [Logic and codes](src/Logic.hs)
 
 * Questions 54A to 60: [Binary trees](src/BinaryTrees.hs)
 

@@ -34,6 +34,7 @@ library
       Lists
       Lists2
       Lists3
+      Logic
       Misc
       Misc2
       MultiwayTrees
@@ -70,6 +71,7 @@ test-suite ninety-nine-test
       Lists2Spec
       Lists3Spec
       ListsSpec
+      LogicSpec
       Misc2Spec
       MiscSpec
       MultiwayTreesSpec

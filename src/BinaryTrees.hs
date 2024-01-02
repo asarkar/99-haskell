@@ -1,4 +1,4 @@
-module BinaryTrees where
+module BinaryTrees (cbalTree, symmetric, construct, symCbalTrees, hbalTree) where
 
 import BinaryTree (Tree (..))
 

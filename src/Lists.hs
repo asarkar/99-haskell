@@ -3,7 +3,20 @@
 
 {-# OPTIONS -Wno-incomplete-patterns #-}
 
-module Lists where
+module Lists
+  ( NestedList (..),
+    myLast,
+    myButLast,
+    elementAt,
+    myLength,
+    myReverse,
+    isPalindrome,
+    flatten,
+    compress,
+    pack,
+    encode,
+  )
+where
 
 import Control.Arrow ((&&&))
 import Control.Monad ((<=<))

@@ -1,4 +1,16 @@
-module Arithmetic where
+module Arithmetic
+  ( isPrime,
+    myGCD,
+    coprime,
+    totient,
+    primeFactors,
+    primeFactorsMult,
+    primesR,
+    goldbach,
+    goldbachList,
+    multiplicativeInverse,
+  )
+where
 
 import Control.Arrow ((&&&))
 import qualified Control.Monad as M

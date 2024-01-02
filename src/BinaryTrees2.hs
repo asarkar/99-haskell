@@ -1,6 +1,22 @@
 {-# OPTIONS -Wno-incomplete-uni-patterns -Wno-incomplete-patterns #-}
 
-module BinaryTrees2 where
+module BinaryTrees2
+  ( countLeaves,
+    leaves,
+    internals,
+    atLevel,
+    completeBinaryTree,
+    layout,
+    layout2,
+    stringToTree,
+    treeToString,
+    treeToPreorder,
+    treeToInorder,
+    preInTree,
+    tree2ds,
+    ds2tree,
+  )
+where
 
 import BinaryTree (Tree (..))
 import Control.Applicative ((<|>))

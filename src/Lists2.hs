@@ -2,7 +2,18 @@
 
 {-# OPTIONS -Wno-incomplete-uni-patterns #-}
 
-module Lists2 where
+module Lists2
+  ( encodeModified,
+    decodeModified,
+    dupli,
+    repli,
+    dropEvery,
+    split,
+    slice,
+    rotate,
+    removeAt,
+  )
+where
 
 import qualified Control.Monad as M
 import qualified Data.List as L

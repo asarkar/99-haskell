@@ -1,7 +1,5 @@
 module MonadsSpec (spec) where
 
--- import Debug.Trace
-
 import qualified Control.Monad as M
 import qualified Data.Char as C
 import Monads

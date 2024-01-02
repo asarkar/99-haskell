@@ -1,4 +1,4 @@
-module Misc where
+module Misc (queens, knightsTour, knightsTo, closedKnights) where
 
 import qualified Control.Monad as M
 import qualified Data.Ix as Ix

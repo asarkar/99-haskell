@@ -1,7 +1,20 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Logic where
+module Logic
+  ( and',
+    or',
+    nand',
+    nor',
+    xor',
+    impl',
+    equ',
+    table,
+    tablen,
+    gray,
+    huffman,
+  )
+where
 
 import qualified Control.Monad as M
 import qualified Data.Bifunctor as Bf

@@ -3,7 +3,7 @@
 
 {-# OPTIONS -Wno-incomplete-patterns #-}
 
-module Parser where
+module Parser (Parser (..), parse, letter, open, close, comma, space) where
 
 import Control.Applicative (Alternative, empty, (<|>))
 import qualified Control.Applicative as A

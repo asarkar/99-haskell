@@ -1,6 +1,13 @@
 {-# LANGUAGE DerivingStrategies #-}
 
-module Monads where
+module Monads
+  ( Operator (..),
+    Element (..),
+    randomWalkPaths,
+    collatz,
+    calculatePostfix,
+  )
+where
 
 import qualified Control.Monad as M
 import qualified Control.Monad.Identity as Id

@@ -1,6 +1,22 @@
 {-# OPTIONS -Wno-incomplete-uni-patterns #-}
 
-module Lists3 where
+module Lists3
+  ( insertAt,
+    range,
+    rndSelect,
+    diffSelect,
+    rndPerm',
+    rndPerm,
+    combinations,
+    group3,
+    group,
+    lsort,
+    lfsort,
+    fibonacci,
+    mmult,
+    fibonacci',
+  )
+where
 
 import qualified Control.Monad as M
 import Data.Array.IO (IOArray)

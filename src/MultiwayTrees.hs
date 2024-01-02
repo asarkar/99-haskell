@@ -1,6 +1,16 @@
 {-# LANGUAGE DerivingStrategies #-}
 
-module MultiwayTrees where
+module MultiwayTrees
+  ( Tree (..),
+    nnodes,
+    stringToTree,
+    treeToString,
+    ipl,
+    bottomUp,
+    treeToLisp,
+    lispToTree,
+  )
+where
 
 import Control.Applicative ((<|>))
 import qualified Control.Applicative as A
@@ -11,43 +21,6 @@ import qualified Parser as P
 
 data Tree a = Node a [Tree a]
   deriving stock (Eq, Show)
-
-tree4 :: Tree Char
-tree4 = Node 'b' [Node 'd' [], Node 'e' []]
-
-tree5 :: Tree Char
-tree5 =
-  Node
-    'a'
-    [ Node
-        'f'
-        [ Node 'g' []
-        ],
-      Node 'c' [],
-      Node
-        'b'
-        [ Node 'd' [],
-          Node 'e' []
-        ]
-    ]
-
-{-
-tree5:
-           ┌──┐
- ┌─────────┤a ├────────┐
- │         └─┬┘        │
- │           │         │
- │           │         │
-┌┴─┐       ┌─┴┐       ┌┴─┐
-│f │       │c │  ┌────┤b ├─────┐
-└┬─┘       └──┘  │    └──┘     │
- │               │             │
- │               │             │
-┌┴─┐           ┌─┴┐           ┌┴─┐
-│g │           │d │           │e │
-└──┘           └──┘           └──┘
-
--}
 
 -- Problem 70B: (*) Check whether a given term represents a multiway tree.
 -- ANSWER: Creating an invalid tree is not possible in Haskell.

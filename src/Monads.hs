@@ -1,4 +1,5 @@
 {-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE FlexibleContexts #-}
 
 module Monads
   ( Operator (..),
@@ -10,7 +11,6 @@ module Monads
 where
 
 import qualified Control.Monad as M
-import qualified Control.Monad.Identity as Id
 import Control.Monad.State (StateT)
 import qualified Control.Monad.State as S
 import Control.Monad.Writer (Writer)
@@ -18,8 +18,6 @@ import qualified Control.Monad.Writer as W
 import qualified Data.Maybe as Mb
 import Data.Monoid (Sum (..))
 import qualified Data.Monoid as Md
-
--- import Control.Monad.Trans.Maybe (MaybeT)
 
 {-
 Problem 74: (**) Monads without do notation.
@@ -95,7 +93,7 @@ Using the Writer monad, count the number of these steps for a given positive int
 collatz :: Int -> Int
 collatz = Md.getSum . W.execWriter . go
   where
-    -- Writer w a, where there exists
+    -- Writer w a, combines w using
     -- a Monoid instance for w.
     go :: Int -> Writer (Sum Int) ()
     go 1 = return ()
@@ -158,44 +156,40 @@ type Logger = Writer [(Stack, Maybe Operator)]
 type Result = Maybe Integer
 
 calculatePostfix :: [Element] -> (Result, [(Stack, Maybe Operator)])
-calculatePostfix xs = (result, calculations)
+calculatePostfix xs = (res, logs)
   where
-    ((result, _), calculations) = Id.runIdentity $ W.runWriterT $ S.runStateT (calc xs) []
+    ((res, _), logs) = W.runWriter $ S.runStateT (calc xs) []
 
 calc :: [Element] -> StateT Stack Logger Result
-calc [] = S.gets extract
+calc [] = S.gets result
 calc (Operand n : xs) = S.get >>= loop xs Nothing . (n :)
 calc (Operator op : xs) =
-  S.get >>= Mb.maybe (return Nothing) (loop xs (Just op)) . calc' op
-
-extract :: [Integer] -> Maybe Integer
-extract [x] = Just x
-extract _ = Nothing
+  S.get >>= Mb.maybe (return Nothing) (loop xs (Just op)) . runOp op
 
 loop :: [Element] -> Maybe Operator -> Stack -> StateT Stack Logger Result
-loop xs op s = do
-  W.tell [(s, op)]
-  S.put s
-  calc xs
+loop xs op s = W.tell [(s, op)] >> S.put s >> calc xs
 
-calc' :: Operator -> Stack -> Maybe Stack
-calc' el s = case el of
-  Negate -> unaryOp s
-  op -> binaryOp op s
+result :: (MonadFail m) => Stack -> m Integer
+result [x] = return x
+result _ = fail ""
 
-unaryOp :: Stack -> Maybe Stack
-unaryOp [] = Nothing
-unaryOp (x : xs) = Just (-x : xs)
+runOp :: (MonadFail m) => Operator -> Stack -> m Stack
+runOp Negate = unaryOp
+runOp op = binaryOp op
 
-binaryOp :: Operator -> Stack -> Maybe Stack
+unaryOp :: (MonadFail m) => Stack -> m Stack
+unaryOp [] = fail ""
+unaryOp (x : xs) = return (-x : xs)
+
+binaryOp :: (MonadFail m) => Operator -> Stack -> m Stack
 binaryOp op (y : x : xs) =
   (: xs) <$> case op of
-    Add -> Just $ x + y
-    Subtract -> Just $ x - y
-    Multiply -> Just $ x * y
-    Divide | y == 0 -> Nothing
-    Divide -> Just $ x `div` y
-    Modulo | y == 0 -> Nothing
+    Add -> return $ x + y
+    Subtract -> return $ x - y
+    Multiply -> return $ x * y
+    Divide | y == 0 -> fail ""
+    Divide -> return $ x `div` y
+    Modulo | y == 0 -> fail ""
     Modulo -> return $ x `mod` y
-    _ -> Nothing
-binaryOp _ _ = Nothing
+    _ -> fail ""
+binaryOp _ _ = fail ""

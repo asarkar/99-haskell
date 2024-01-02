@@ -10,7 +10,7 @@ import Data.List ((\\))
 import qualified Data.List as L
 import qualified System.Random as R
 
--- Problem 21: Insert an element at a given position into a list.
+-- Problem 21: (*) Insert an element at a given position into a list.
 insertAt :: a -> [a] -> Int -> [a]
 insertAt x xs n
   | n > 0 = left ++ [x] ++ right
@@ -18,7 +18,7 @@ insertAt x xs n
   where
     (left, right) = L.splitAt (n - 1) xs
 
--- Problem 22: Create a list containing all integers within a given range.
+-- Problem 22: (*) Create a list containing all integers within a given range.
 range :: Int -> Int -> [Int]
 range start end
   | start <= end = [start .. end]
@@ -33,7 +33,7 @@ randomElems n m xs
       let (left, x : right) = L.splitAt (k - 1) xs
       (x :) <$> randomElems (n - 1) (m - 1) (left ++ right)
 
--- Problem 23: Extract a given number of randomly selected elements from a list.
+-- Problem 23: (**) Extract a given number of randomly selected elements from a list.
 -- Note: This implementation chooses with replacement.
 rndSelect :: [a] -> Int -> IO [a]
 rndSelect xs n
@@ -48,18 +48,18 @@ randomElem xs = i <&> (xs !!)
     n = length xs
     i = R.randomRIO (0, n - 1)
 
--- Problem 24: Draw N different random numbers from the set 1..M.
+-- Problem 24: (*) Draw N different random numbers from the set 1..M.
 -- Note: The selected elements are unique.
 diffSelect :: Int -> Int -> IO [Int]
 diffSelect n m = randomElems n m [1 .. m]
 
--- Problem 25: Generate a random permutation of the elements of a list.
+-- Problem 25: (*) Generate a random permutation of the elements of a list.
 rndPerm' :: [a] -> IO [a]
 rndPerm' xs = randomElems n n xs
   where
     n = length xs
 
--- Problem 25: Generate a random permutation of the elements of a list.
+-- Problem 25: (*) Generate a random permutation of the elements of a list.
 
 {-
 ANSWER: Alternative imperative solution.
@@ -98,7 +98,7 @@ combinations n xs = do
   return (y : zs)
 
 {-
-Problem 27a: In how many ways can a group of 9 people
+Problem 27a: (**) In how many ways can a group of 9 people
 work in 3 disjoint subgroups of 2, 3 and 4 persons?
 Write a function that generates all the possibilities
 and returns them in a list.
@@ -107,7 +107,7 @@ group3 :: (Eq a) => [a] -> [[[a]]]
 group3 = group [2 .. 4]
 
 {-
-Problem 27b: In how many ways can a group of 9 people
+Problem 27b: (**) In how many ways can a group of 9 people
 work in disjoint subgroups of the given sizes?
 Write a function that generates all the possibilities
 and returns them in a list.
@@ -120,12 +120,12 @@ group (i : is) xs = do
   xxs <- group is (xs \\ ys)
   return (ys : xxs)
 
--- Problem 28a: Sort the elements of this list according to their length;
+-- Problem 28a: (**) Sort the elements of this list according to their length;
 -- i.e short lists first, longer lists later.
 lsort :: [[a]] -> [[a]]
 lsort = L.sortOn length
 
--- Problem 28b: Sort the elements of this list according to their length frequency;
+-- Problem 28b: (**) Sort the elements of this list according to their length frequency;
 -- i.e., lists with rare lengths are placed first, others with a more frequent length come later.
 lfsort :: [[a]] -> [[a]]
 lfsort xxs = L.sortOn lenFreq xxs
@@ -133,3 +133,53 @@ lfsort xxs = L.sortOn lenFreq xxs
     ls = map length xxs
     count x = (length . filter (== x)) ls
     lenFreq xs = count (length xs)
+
+{-
+Problem 29: (*) Write a function to compute the nth Fibonacci number.
+-}
+fibonacci :: Int -> Int
+fibonacci = go 0 1
+  where
+    go x _ 1 = x
+    go x y n = go y (x + y) (n - 1)
+
+-- https://rosettacode.org/wiki/Matrix_multiplication#Haskell
+-- Not the most efficient though.
+mmult :: (Num a) => [[a]] -> [[a]] -> [[a]]
+mmult a b = [[sum $ zipWith (*) ar bc | bc <- L.transpose b] | ar <- a]
+
+{-
+Problem 30: (**) Write a function to compute the nth Fibonacci number.
+
+Consider the following matrix equation, where F(n) is the nth Fibonacci number:
+
+\|x2| = |1 1|   |F(n+1)|
+\|x1| = |1 0| x |F(n)  |
+
+When written out as linear equations, this is equivalent to:
+
+x2 = F(n+1) + F(n)
+x1 = F(n+1)
+
+So x2 = F(n+2) and x1 = F(n+1).
+Together with the associativity of matrix multiplication, this means:
+
+\|F(n+2)|   |1 1|   |F(n+1)|   |1 1|   |1 1|   |F(n)  |         |1 1|^n   |F(2)|
+\|F(n+1)| = |1 0| x |F(n)  | = |1 0| x |1 0| x |F(n-1)| = ... = |1 0|   x |F(1)|
+
+Take advantage of this to write a function which computes the nth Fibonacci number
+with O(log n) multiplications.
+Compare with the solution for Problems.P29.
+-}
+fibonacci' :: Int -> Int
+fibonacci' n
+  | n <= 2 = n - 1
+  | otherwise = head $ head $ go (n - 2)
+  where
+    go i
+      | i == 1 = xs
+      | even i = mmult ys ys
+      | otherwise = mmult xs $ mmult ys ys
+      where
+        xs = [[1, 1], [1, 0]]
+        ys = go (i `div` 2)

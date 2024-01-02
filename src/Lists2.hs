@@ -44,7 +44,7 @@ Implement the so-called run-length encoding data
 compression method directly.
 -}
 
--- Problem 14: Duplicate the elements of a list.
+-- Problem 14: (*) Duplicate the elements of a list.
 dupli :: [a] -> [a]
 dupli xs = repli xs 2 -- (take 2 . repeat =<<)
 

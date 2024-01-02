@@ -111,3 +111,11 @@ spec = do
     it "sorts a list of lists according to their length frequency" $ do
       lfsort ["abc", "de", "fgh", "de", "ijkl", "mn", "o"]
         `shouldBe` ["ijkl", "o", "abc", "fgh", "de", "de", "mn"]
+
+  describe "fibonacci" $ do
+    it "generates the nth Fibonacci number" $ do
+      map fibonacci [1 .. 8] `shouldBe` [0, 1, 1, 2, 3, 5, 8, 13]
+
+  describe "fibonacci'" $ do
+    it "generates the nth Fibonacci number" $ do
+      map fibonacci' [1 .. 8] `shouldBe` [0, 1, 1, 2, 3, 5, 8, 13]

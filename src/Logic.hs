@@ -85,19 +85,16 @@ Gray code is given by the XOR of the i-th and the (i - 1)th bits
 of the binary representation of i, where 0 <= i < 2^n.
 
 For the example above, n = 2, the corresponding Gray codes are:
-0 ^ 0 = 0, 1 ^ 0 = 1, 2 ^ 1 = 3 and, 3 ^ 1 = 2
+0 ^ 0 = 0 (00), 1 ^ 0 = 1 (01), 2 ^ 1 = 3 (11) and, 3 ^ 1 = 2 (10)
 -}
 gray :: Int -> [String]
-gray n = [P.printf "%0*b" n (y i) | i <- [0 .. x - 1]]
+gray n = [P.printf "%0*b" n (g i) | i <- [0 .. x - 1]]
   where
     x = 1 `B.shiftL` n :: Int -- 2 ^ n - 1
-    y i = i `B.xor` (i `B.shiftR` 1) -- i xor (i `div` 2)
-
-data Tree = Branch Tree Tree | Leaf Char
-  deriving stock (Eq, Show)
+    g i = i `B.xor` (i `B.shiftR` 1) -- i xor (i `div` 2)
 
 {-
-Problem 50: Given a list of characters and their number of occurrences,
+Problem 50: (***) Given a list of characters and their number of occurrences,
 construct a list of the characters and their Huffman encoding.
 
 ANSWER:
@@ -115,14 +112,18 @@ removes the original subtrees/symbols from the list, and then adds the new subtr
 its combined probability to the list. This repeats until there is one tree and all
 elements have been added.
 -}
-type PQ = HashPSQ String Int Tree
+
+data HTree = Branch HTree HTree | Leaf Char
+  deriving stock (Eq, Show)
+
+type PQ = HashPSQ String Int HTree
 
 huffman :: [(Char, Int)] -> [(Char, String)]
 huffman freq = treeToList $ go $ Q.fromList initial
   where
     initial = map (\(c, n) -> ([c], n, Leaf c)) freq
 
-    minN :: Int -> PQ -> ([(String, Int, Tree)], PQ)
+    minN :: Int -> PQ -> ([(String, Int, HTree)], PQ)
     minN 0 q = ([], q)
     minN n q = case Q.minView q of
       Nothing -> ([], q)
@@ -130,17 +131,17 @@ huffman freq = treeToList $ go $ Q.fromList initial
         let (xs, q'') = minN (n - 1) q'
          in ((k, p, v) : xs, q'')
 
-    go :: PQ -> Tree
-    go q
-      | Q.null q = error "empty heap"
-      | Q.size q == 1 = let ((_, _, tree) : _, _) = minN 1 q in tree
-      | otherwise = do
-          let ((k1, p1, v1) : (k2, p2, v2) : _, q') = minN 2 q
-          let node =
-                if p1 < p2
-                  then Branch v1 v2
-                  else Branch v2 v1
-          go $ Q.insert (k1 ++ k2) (p1 + p2) node q'
+    go :: PQ -> HTree
+    go q = case Q.size q of
+      0 -> error "empty heap"
+      1 -> let ((_, _, tree) : _, _) = minN 1 q in tree
+      _ -> do
+        let ((k1, p1, v1) : (k2, p2, v2) : _, q') = minN 2 q
+        let node =
+              if p1 < p2
+                then Branch v1 v2
+                else Branch v2 v1
+        go $ Q.insert (k1 ++ k2) (p1 + p2) node q'
 
     {-
     Although Huffman coding doesn't specify which of the
@@ -148,9 +149,84 @@ huffman freq = treeToList $ go $ Q.fromList initial
     the examples put the smaller value on the left.
     Also, the examples encode the left branch as 0.
     -}
-    treeToList :: Tree -> [(Char, String)]
+    treeToList :: HTree -> [(Char, String)]
     treeToList (Leaf x) = [(x, "")]
     treeToList (Branch l r) = left ++ right
       where
         left = map (Bf.second ('0' :)) $ treeToList l
         right = map (Bf.second ('1' :)) $ treeToList r
+
+{-
+Problem 51: (*) Error correction codes.
+
+corrupt :: RandomGen g => g -> Int -> [Bool] -> [Bool]
+
+Flip a given number of boolean values in the boolean list randomly.
+
+Examples:
+  >>> corrupt (mkStdGen 111) 2 [False, True, True, False, True]
+  [False,False,True,True,False]
+
+errorCorrectingEncode :: [Bool] -> [Bool]
+
+Construct an error-correcting encoding of the given Boolean list.
+
+The encoding must be able to correct at least one error.
+Consider using a repetition code of length 3.
+
+errorCorrectingDecode :: [Bool] -> [Bool]
+
+The inverse of errorCorrectingEncode. Recover the original Boolean list from its encoding.
+There could be a single error in the encoding.
+
+Examples:
+
+  >>> errorCorrectingDecode . errorCorrectingEncode $ [False, False, True, False]
+  [False,False,True,False]
+  ---
+  >>> let e = errorCorrectingEncode [True, False, False, True, False]
+  >>> let e' = corrupt (mkStdGen 111) 1 e
+  >>> errorCorrectingDecode e'
+  [True,False,False,True,False]
+
+ANSWER: TODO.
+-}
+
+{-
+Problem 52: (***) Conjunctive normal form.
+
+It is known that any boolean function can be represented in conjunctive normal form.
+These are conjunctions of disjunctions of literals, where literals are one of boolean
+values, variables, or the complement of values or variables.
+
+Return the conjunctive normal form of a boolean formula. The value returned should
+always be a conjunction of disjunctions.
+
+data Formula
+  Constructors:
+
+  Value Bool: A constant value.
+
+  Variable String: A variable with given name.
+
+  Complement Formula: Logical complement. I.e., it is true only if its clause is false.
+
+  Disjoin [Formula]: Disjunction. I.e., it is true if any of its clauses are true.
+
+  Conjoin [Formula]: toConjunctiveNormalForm :: Formula -> Formula
+
+Examples:
+  >>> toConjunctiveNormalForm $ Value True
+  Conjoin [Disjoin [Value True]]
+
+  >>> toConjunctiveNormalForm $ Complement $ Disjoin [Variable "X", Variable "Y"]
+  Conjoin [Disjoin [Complement (Variable "X")],Disjoin [Complement (Variable "Y")]]
+
+ANSWER: TODO.
+-}
+
+{-
+Problem 53: (***) Resolution rule.
+
+The problem description is a page long, don't even bother.
+-}

@@ -8,11 +8,11 @@
 
 * Questions 11 to 20: [Lists, continued](src/Lists2.hs)
 
-* Questions 21 to 28: [Lists again](src/Lists3.hs)
+* Questions 21 to 30: [Lists again](src/Lists3.hs)
 
-* Questions 31 to 41: [Arithmetic](src/Arithmetic.hs)
+* Questions 31 to 45: [Arithmetic](src/Arithmetic.hs)
 
-* Questions 46 to 50: [Logic and codes](src/Logic.hs)
+* Questions 46 to 53: [Logic and codes](src/Logic.hs)
 
 * Questions 54A to 60: [Binary trees](src/BinaryTrees.hs)
 
@@ -20,13 +20,13 @@
 
 * Questions 70B to 73: [Multiway trees](src/MultiwayTrees.hs)
 
+* Questions 74 to 79: [Monads](src/Monads.hs)
+
 * Questions 80 to 89: [Graphs](src/Graphs.hs)
 
 * Questions 90 to 94: [Miscellaneous problems](src/Misc.hs)
 
 * Questions 95 to 99: [Miscellaneous problems, continued](src/Misc2.hs)
-
-(Though the problems number from 1 to 99, there are some gaps and some additions marked with letters. There are actually only 88 problems.)
 
 ## Running tests
 

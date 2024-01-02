@@ -9,14 +9,14 @@ import qualified Data.List.Split as LS
 import Parser (Parser (..))
 import qualified Parser as P
 
--- Problem 61: Count the leaves of a binary tree.
+-- Problem 61: (*) Count the leaves of a binary tree.
 countLeaves :: Tree a -> Int
 countLeaves Empty = 0
 countLeaves (Branch _ l r) = case (l, r) of
   (Empty, Empty) -> 1
   _ -> countLeaves l + countLeaves r
 
--- Problem 61A: Collect the leaves of a binary tree in a list.
+-- Problem 61A: (*) Collect the leaves of a binary tree in a list.
 leaves :: Tree a -> [a]
 leaves = go []
   where
@@ -25,7 +25,7 @@ leaves = go []
       (Empty, Empty) -> x : acc
       _ -> go (go acc r) l
 
--- Problem 62: Collect the internal nodes of a binary tree in a list.
+-- Problem 62: (*) Collect the internal nodes of a binary tree in a list.
 internals :: Tree a -> [a]
 internals = go []
   where
@@ -34,7 +34,7 @@ internals = go []
       (Empty, Empty) -> acc
       _ -> x : go (go acc r) l
 
--- Problem 62B: Collect the nodes at a given level in a list.
+-- Problem 62B: (*) Collect the nodes at a given level in a list.
 atLevel :: Tree a -> Int -> [a]
 atLevel = go []
   where
@@ -43,7 +43,7 @@ atLevel = go []
       | level == 1 = x : acc
       | otherwise = go (go acc r (level - 1)) l (level - 1)
 
--- Problem 63: Construct a complete binary tree.
+-- Problem 63: (**) Construct a complete binary tree.
 {-
 ANSWER:
 Considering the height H of the tree as the number of edges on
@@ -85,7 +85,7 @@ type Pos = (Int, Int)
 type AnnotatedTree a = Tree (a, Pos)
 
 {-
-Problem 64: Layout algorithm for displaying trees.
+Problem 64: (**) Layout algorithm for displaying trees.
 In this layout strategy, the position of a node v is obtained by the following two rules:
 
 - x(v) is equal to the position of the node v in the inorder sequence
@@ -112,7 +112,7 @@ height Empty = -1
 height (Branch _ l r) = 1 + max (height l) (height r)
 
 {-
-Problem 65: Layout algorithm for displaying trees (part 2).
+Problem 65: (**) Layout algorithm for displaying trees (part 2).
 
 ANSWER: In this problem, no two nodes share the same Y-coordinate.
 Thus, the X-coordinate of a node is determined by the maximum
@@ -147,7 +147,7 @@ layout2 = fst . (go 1 1 =<< (2 *) . height)
         node = Branch (x, (pos', depth)) left right
 
 {-
-Problem 66: Layout algorithm for displaying trees (part 3).
+Problem 66: (***) Layout algorithm for displaying trees (part 3).
 
 The method yields a very compact layout while maintaining a
 certain symmetry in every node. Find out the rules and write
@@ -164,7 +164,7 @@ TODO.
 -}
 
 {-
-Problem 67A: A string representation of binary trees.
+Problem 67A: (**) A string representation of binary trees.
 Write a predicate which generates this string representation.
 Then write a predicate which does this inverse; i.e. given the
 string representation, construct the tree in the usual form.
@@ -210,7 +210,7 @@ treeToString = D.toList . go D.empty
         D.++ D.singleton ')'
 
 {-
-Problem 68: Preorder and inorder sequences of binary trees.
+Problem 68: (**) Preorder and inorder sequences of binary trees.
 
 a) Write predicates preorder and inorder that construct the
    preorder and inorder sequence of a given binary tree,
@@ -258,7 +258,7 @@ preInTree pre = fst . build pre
         (right, zs) = build ys io''
 
 {-
-Problem 69: Dotstring representation of binary trees.
+Problem 69: (**) Dotstring representation of binary trees.
 
 First, try to establish a syntax (BNF or syntax diagrams)
 and then write a predicate tree_dotstring which does the

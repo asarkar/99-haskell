@@ -180,7 +180,7 @@ prim edges = S.evalState go initialState
     (u0, _, _) = head edges
     -- Start with all edges incident to u0 on the heap.
     initialState = (Set.singleton u0, relax Q.empty (outE u0))
-    -- Sorts the given edge so that u appears first.
+    -- Sorts the given edge so that vertex u appears first.
     sortE u (x, y, cost) = if x == u then (x, y, cost) else (y, x, cost)
     -- Determines if the given edge is incident to u.
     isIncidentTo u (x, y, _) = x == u || y == u
@@ -273,21 +273,23 @@ iso v1 e1 v2 e2 = m == n && go 0 0 (map (,0) v1) (map (,0) v2) 1
     m = length v1
     n = length v2
 
-    -- Find old label.
+    -- Finds old label.
+    -- RankNTypes needs to be enabled to use forall.
     label :: forall a. (Eq a) => [(a, Int)] -> a -> Int
     label cl = Mb.fromJust . flip L.lookup cl
     -- Given the neighbors and their compressed labels,
-    -- compute new uncompressed label for this vertex.
+    -- computes new uncompressed label for this vertex.
     uncompress cl = L.sort . map (label cl)
-    -- Group uncompressed labels, and assign a compressed label to each group.
-    group xxs labelId =
+    -- Groups uncompressed labels, and
+    -- assigns a label to each group.
+    group ucl labelId =
       zipWith
         (\xs k -> (head xs, (length xs, k)))
-        (L.group $ L.sort xxs)
+        (L.group $ L.sort ucl)
         [labelId + 1 ..]
-    -- Assign compressed label to each group.
-    compress xs xxs = map (snd . Mb.fromJust . flip L.lookup xxs) xs
-    -- Reduce the graph into canonical form.
+    -- Replaces each uncompressed group with its compressed label.
+    compress ucl groups = map (snd . Mb.fromJust . flip L.lookup groups) ucl
+    -- Reduces the graph into canonical form.
     canonical = L.sortOn fst . map (\(_, (x, y)) -> (y, x))
 
     go i labelId cl1 cl2 numLabels
@@ -353,7 +355,10 @@ kColor vs es = go vs' Map.empty 1
 
     go [] clrMap clr
       | Map.size clrMap == n = Map.toList clrMap
+      -- Try another color for the remaining vertices.
       | otherwise = go (filter (`Map.notMember` clrMap) vs') clrMap (clr + 1)
+    -- Try to assign color clr to each vertex, making sure
+    -- no two adjacent vertices end up with the same color.
     go (v : xs) clrMap clr
       | canClr = go xs (Map.insert v clr clrMap) clr
       | otherwise = go xs clrMap clr

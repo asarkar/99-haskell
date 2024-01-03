@@ -9,8 +9,6 @@ are uninteresting/improbable in the context of Haskell.
 A number of problems were added to fill out 99 problems.
 - These are the problems 29, 30, 42, 43, 44, 45, 51, 52, 53, 74, 75, 76, 77, 78, and 79.
 
-These modifications are based on https://ninetynine.haskell.chungyc.org/Problems.html.
-
 ## The problems
 
 * Questions 1 to 10: [Lists](src/Lists.hs)

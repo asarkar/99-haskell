@@ -43,9 +43,22 @@ spec = do
 
   describe "calculatePostfix" $ do
     it "evaluates an expression in postfix notation" $ do
+      let xs =
+            [ ("8 5 4 10 + - 3 * negate +", Just 35),
+              ("8 5 -", Just 3),
+              ("8 6", Nothing),
+              ("8 negate", Just (-8)),
+              ("8 +", Nothing)
+            ]
+      M.forM_ xs $ \(ex, res) -> do
+        let expr = parsePostfix ex
+        let result = calculatePostfix expr
+        fst result `shouldBe` res
+
+    it "logs each step of a computation" $ do
       let expr = parsePostfix "8 5 4 10 + - 3 * negate +"
       let result = calculatePostfix expr
-      fst result `shouldBe` Just 35
+
       snd result
         `shouldBe` [ ([8], Nothing),
                      ([5, 8], Nothing),
@@ -59,17 +72,11 @@ spec = do
                      ([35], Just Add)
                    ]
 
-      let xs = [("8 5 -", Just 3), ("8 6", Nothing), ("8 negate", Just (-8)), ("8 +", Nothing)]
+    it "logs each step of a failed computation" $ do
+      let expr = parsePostfix "1 2 * +"
+      let result = calculatePostfix expr
 
-      M.forM_ xs $ \(ex, res) -> do
-        let expr' = parsePostfix ex
-        let result' = calculatePostfix expr'
-        fst result' `shouldBe` res
-
-      let expr2 = parsePostfix "1 2 * +"
-      let result2 = calculatePostfix expr2
-      fst result2 `shouldBe` Nothing
-      snd result2
+      snd result
         `shouldBe` [ ([1], Nothing),
                      ([2, 1], Nothing),
                      ([2], Just Multiply)

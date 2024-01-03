@@ -53,6 +53,7 @@ library:
   - random
   - array
   - mtl
+  - transformers
   - psqueues
   - hashable
   - vector

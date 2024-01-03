@@ -1,5 +1,4 @@
 {-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE FlexibleContexts #-}
 
 module Monads
   ( Operator (..),
@@ -11,11 +10,12 @@ module Monads
 where
 
 import qualified Control.Monad as M
-import Control.Monad.State (StateT)
+import Control.Monad.State (State)
 import qualified Control.Monad.State as S
-import Control.Monad.Writer (Writer)
+import Control.Monad.Trans.Maybe (MaybeT)
+import qualified Control.Monad.Trans.Maybe as Mb
+import Control.Monad.Writer (Writer, WriterT)
 import qualified Control.Monad.Writer as W
-import qualified Data.Maybe as Mb
 import Data.Monoid (Sum (..))
 import qualified Data.Monoid as Md
 
@@ -151,24 +151,38 @@ data Element = Operator Operator | Operand Integer deriving stock (Show, Eq)
 
 type Stack = [Integer]
 
-type Logger = Writer [(Stack, Maybe Operator)]
+type Logs = [(Stack, Maybe Operator)]
 
 type Result = Maybe Integer
 
-calculatePostfix :: [Element] -> (Result, [(Stack, Maybe Operator)])
-calculatePostfix xs = (res, logs)
+{-
+Stack order matters. The output is in the reverse order,
+i.e. the innermost monad result wraps the others.
+((a, w), s), where a is Result, w is Logs, and s is Stack.
+-}
+type Calculation = MaybeT (WriterT Logs (State Stack)) Integer
+
+calculatePostfix :: [Element] -> (Result, Logs)
+calculatePostfix = fst . chain . calc
   where
-    ((res, _), logs) = W.runWriter $ S.runStateT (calc xs) []
+    chain = flip S.runState [] . W.runWriterT . Mb.runMaybeT
 
-calc :: [Element] -> StateT Stack Logger Result
-calc [] = S.gets result
-calc (Operand n : xs) = S.get >>= loop xs Nothing . (n :)
-calc (Operator op : xs) =
-  S.get >>= Mb.maybe (return Nothing) (loop xs (Just op)) . runOp op
+calc :: [Element] -> Calculation
+calc elems =
+  S.get >>= case elems of
+    [] -> result
+    (Operand n : xs) -> loop xs Nothing . (n :)
+    (Operator op : xs) -> runOp op M.>=> loop xs (Just op)
 
-loop :: [Element] -> Maybe Operator -> Stack -> StateT Stack Logger Result
+loop :: [Element] -> Maybe Operator -> Stack -> Calculation
 loop xs op s = W.tell [(s, op)] >> S.put s >> calc xs
 
+{-
+The 'fail' invocations are using the MonadFail instance for Maybe,
+(which is the monad 'm' in the function signatures below).
+The error message is ignored by the instance, so, we don't
+bother passing one.
+-}
 result :: (MonadFail m) => Stack -> m Integer
 result [x] = return x
 result _ = fail ""

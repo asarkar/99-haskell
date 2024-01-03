@@ -59,18 +59,19 @@ Write a function which checks whether a given string is a legal identifier.
 
 ANSWER:
 We translate the above syntax diagram into the following state transition diagram.
-State are as shown as boxes, and the transitions are shown as edges. The events
-causing the transitions are shown as the edge labels.
+States are shown as boxes, and the transitions are shown as arrows between the boxes.
+State transitions are caused by reading the next character, if any.
+The state transition rules are shown as edge labels.
 
                                  ┌───────────────────────────────┐
                                  │                               │
-                                 │ ┌───────────────┐             │not ""
-                                 │ │               │             │
-┌──────┐letter  ┌──────┐ not "" ┌▼─┴───┐not '_'┌───▼──┐letter┌───┴──┐
-│ begin├────────► S1   ├────────► s2   ├───────►  s3  ├──────►  s4  │
+                                 │                        not "" │
+                                 │                               │
+┌──────┐letter  ┌──────┐not ""  ┌▼─────┐not '_'┌──────┐letter┌───┴──┐
+│ begin├────────► S1   ├────────► s2   ├───────►  s   ├──────►  s4  │
 └──────┘        └───┬──┘        └──────┘  '_'  └──────┘digit └───┬──┘
                     │                                            │
-                  ""│                                            │""
+                  ""│                                          ""│
                     │                                            │
                     │           ┌──────┐                         │
                     └───────────► end  ◄─────────────────────────┘
@@ -82,8 +83,10 @@ remaining string, otherwise it transitions to S3 with the same input that
 it had received.
 Same for S1-(not "")-> S2, and S4-(not "")-> S2.
 
-Other than the defined events, any other event causes a transition to the
-error state (modeled by Nothing in code).
+"" indicates the end of string.
+
+Reading a character not matching one of the defined transition rules for
+that state causes a transition to the error state (not shown in the diagram).
 -}
 
 data ParserState = Begin | S1 | S2 | S3 | S4 | End

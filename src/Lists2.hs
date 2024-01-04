@@ -65,13 +65,7 @@ repli xs n = xs >>= replicate n
 
 -- Problem 16: (**) Drop every N'th element from a list.
 dropEvery :: [a] -> Int -> [a]
-dropEvery xs n = concat $ go xs
-  where
-    go ys
-      | null right = [left]
-      | otherwise = left : go (tail right)
-      where
-        (left, right) = L.splitAt (n - 1) ys
+dropEvery xs n = [x | (i, x) <- zip [1 ..] xs, i `mod` n /= 0]
 
 {-
 Problem 17: (*) Split a list into two parts;

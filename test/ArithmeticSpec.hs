@@ -58,6 +58,7 @@ spec = do
   describe "primesR" $ do
     it "constructs a list of primes within a given range" $ do
       primesR 10 20 `shouldBe` [11, 13, 17, 19]
+      primesR 7 31 `shouldBe` [7, 11, 13, 17, 19, 23, 29, 31]
 
   describe "goldbach" $ do
     it "finds two prime numbers that sum to a given even integer" $ do

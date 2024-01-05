@@ -47,7 +47,7 @@ Problem 33: (*) Determine whether two positive integer numbers are coprime.
 Two numbers are coprime if their greatest common divisor equals 1.
 -}
 coprime :: Int -> Int -> Bool
-coprime x y = myGCD x y == 1
+coprime = ((1 ==) .) . myGCD
 
 {-
 Problem 34: (**) Calculate Euler's totient function phi(m).

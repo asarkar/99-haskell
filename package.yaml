@@ -25,8 +25,10 @@ dependencies:
 - split
 - containers
 
+default-extensions:
+- TupleSections
+
 ghc-options:
-- -XTupleSections
 - -Werror
 # For details on warnings: https://downloads.haskell.org/~ghc/master/users-guide/using-warnings.html
 # This list originally taken from https://medium.com/mercury-bank/enable-all-the-warnings-a0517bc081c3

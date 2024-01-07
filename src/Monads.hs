@@ -1,4 +1,5 @@
 {-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE FlexibleContexts #-}
 
 module Monads
   ( Operator (..),
@@ -10,12 +11,12 @@ module Monads
 where
 
 import qualified Control.Monad as M
-import Control.Monad.State (State)
+import Control.Monad.State (MonadState, State)
 import qualified Control.Monad.State as S
 import Control.Monad.Trans.Maybe (MaybeT)
 import qualified Control.Monad.Trans.Maybe as Mb
-import Control.Monad.Writer (Writer, WriterT)
-import qualified Control.Monad.Writer as W
+import Control.Monad.Writer.Strict (MonadWriter, Writer, WriterT)
+import qualified Control.Monad.Writer.Strict as W
 import Data.Monoid (Sum (..))
 import qualified Data.Monoid as Md
 
@@ -159,6 +160,12 @@ type Result = Maybe Integer
 Stack order matters. The output is in the reverse order,
 i.e. the innermost monad result wraps the others.
 ((a, w), s), where a is Result, w is Logs, and s is Stack.
+
+This implementation uses the "tagless final" approach:
+- Functions are declared using type constraints instead of
+  concrete types.
+- Instantiation of a polymorphic function to a concrete type
+  (aka interpreter) happens "at the end":
 -}
 type Calculation = MaybeT (WriterT Logs (State Stack)) Integer
 
@@ -167,14 +174,22 @@ calculatePostfix = fst . chain . calc
   where
     chain = flip S.runState [] . W.runWriterT . Mb.runMaybeT
 
-calc :: [Element] -> Calculation
+calc ::
+  (MonadWriter Logs m, MonadState Stack m, MonadFail m) =>
+  [Element] ->
+  m Integer
 calc elems =
   S.get >>= case elems of
     [] -> result
     (Operand n : xs) -> loop xs Nothing . (n :)
     (Operator op : xs) -> runOp op M.>=> loop xs (Just op)
 
-loop :: [Element] -> Maybe Operator -> Stack -> Calculation
+loop ::
+  (MonadWriter Logs m, MonadState Stack m, MonadFail m) =>
+  [Element] ->
+  Maybe Operator ->
+  Stack ->
+  m Integer
 loop xs op s = W.tell [(s, op)] >> S.put s >> calc xs
 
 {-

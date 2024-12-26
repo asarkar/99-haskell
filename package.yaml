@@ -4,7 +4,6 @@ github:              "asarkar/99-haskell"
 # https://spdx.org/licenses/
 license:             "Apache-2.0"
 author:              "Abhijit Sarkar"
-maintainer:          "contact@asarkar.com"
 copyright:           "2023 Abhijit Sarkar"
 
 extra-source-files:

@@ -56,7 +56,7 @@ if (( no_lint == 0 )); then
 	fi
 
 	ormolu_mode="check"
-	if [[ "$OSTYPE" == "darwin"* ]]; then
+	if [[ -z "$CI" ]]; then
 		ormolu_mode="inplace"
 	fi
 	

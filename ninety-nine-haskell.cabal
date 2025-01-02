@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.36.0.
+-- This file has been generated from package.yaml by hpack version 0.37.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -10,7 +10,7 @@ description:    Please see the README on GitHub at <https://github.com/asarkar/9
 homepage:       https://github.com/asarkar/99-haskell#readme
 bug-reports:    https://github.com/asarkar/99-haskell/issues
 author:         Abhijit Sarkar
-maintainer:     contact@asarkar.com
+maintainer:     Abhijit Sarkar
 copyright:      2023 Abhijit Sarkar
 license:        Apache-2.0
 license-file:   LICENSE

@@ -147,15 +147,15 @@ primesR a b = if a < 3 then 2 : xs else xs
         True
         (o, b) -- bounds of the array
         [ (i, ()) -- association list
-          | p <- [3, 5 .. r],
-            -- Flip every multiple of an odd to False.
-            let q = p * p
-                s = 2 * p
-                -- Difference between divMod and quotRem.
-                -- https://stackoverflow.com/a/339823/839733
-                (n, x) = quotRem (o - q) s
-                q2 = if o <= q then q else q + (n + signum x) * s,
-            i <- [q2, q2 + s .. b]
+        | p <- [3, 5 .. r],
+          -- Flip every multiple of an odd to False.
+          let q = p * p
+              s = 2 * p
+              -- Difference between divMod and quotRem.
+              -- https://stackoverflow.com/a/339823/839733
+              (n, x) = quotRem (o - q) s
+              q2 = if o <= q then q else q + (n + signum x) * s,
+          i <- [q2, q2 + s .. b]
         ]
 
 {-
@@ -168,9 +168,9 @@ goldbach :: Int -> (Int, Int)
 goldbach n =
   head
     [ (x, y)
-      | x <- primesR 2 (n - 2),
-        let y = n - x,
-        isPrime y
+    | x <- primesR 2 (n - 2),
+      let y = n - x,
+      isPrime y
     ]
 
 {-

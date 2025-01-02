@@ -49,10 +49,13 @@ if (( no_test == 0 )); then
 fi
 
 if (( no_lint == 0 )); then
+	red=$(tput -Txterm-256color setaf 1)
+	default=$(tput -Txterm-256color sgr0)
+
 	if [[ -x "$(command -v hlint)" ]]; then
 		hlint .
 	else
-		printf "hlint not found"
+		printf "%bhlint not found%b\n" "$red" "$default"
 	fi
 
 	ormolu_mode="check"
@@ -63,6 +66,6 @@ if (( no_lint == 0 )); then
 	if [[ -x "$(command -v ormolu)" ]]; then
 		ormolu -m "$ormolu_mode" $(find . -type f -name '*.hs')
 	else
-		printf "ormolu not found"
+		printf "%bormolu not found%b\n" "$red" "$default"
 	fi
 fi

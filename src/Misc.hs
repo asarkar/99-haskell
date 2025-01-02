@@ -62,10 +62,10 @@ knightsTour n isDone = go Set.empty
         ys = L.find (not . null) $ map (go (Set.insert pos visited)) nexts
         moves (i, j) =
           [ (i', j')
-            | (dx, dy) <- [(1, 2), (2, 1)],
-              i' <- [i + dx, i - dx],
-              j' <- [j + dy, j - dy],
-              Ix.inRange ((1, 1), (n, n)) (i', j')
+          | (dx, dy) <- [(1, 2), (2, 1)],
+            i' <- [i + dx, i - dx],
+            j' <- [j + dy, j - dy],
+            Ix.inRange ((1, 1), (n, n)) (i', j')
           ]
 
 {-

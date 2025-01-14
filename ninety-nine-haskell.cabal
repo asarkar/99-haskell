@@ -5,23 +5,18 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           ninety-nine-haskell
-version:        1.0.0
+version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/asarkar/99-haskell#readme>
 homepage:       https://github.com/asarkar/99-haskell#readme
-bug-reports:    https://github.com/asarkar/99-haskell/issues
 author:         Abhijit Sarkar
 maintainer:     Abhijit Sarkar
-copyright:      2023 Abhijit Sarkar
+copyright:      2024 Abhijit Sarkar
 license:        Apache-2.0
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
     LICENSE
-
-source-repository head
-  type: git
-  location: https://github.com/asarkar/99-haskell
 
 library
   exposed-modules:
@@ -46,10 +41,10 @@ library
       src
   default-extensions:
       TupleSections
-  ghc-options: -Werror -Weverything -Wno-missing-import-lists -Wno-missed-specializations -Wno-all-missed-specializations -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-safe-haskell-mode -Wno-safe -Wno-unsafe -Wno-implicit-prelude -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-unused-top-binds -Wno-missing-export-lists
+  ghc-options: -Werror -Weverything -Wno-missing-import-lists -Wno-missed-specializations -Wno-all-missed-specializations -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-safe-haskell-mode -Wno-safe -Wno-unsafe -Wno-implicit-prelude -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-unused-top-binds -Wno-missing-export-lists -Wno-missing-role-annotations -Wno-x-partial
   build-depends:
       array
-    , base >=4.7 && <5
+    , base >4 && <5
     , containers
     , hashable
     , mtl
@@ -86,10 +81,10 @@ test-suite ninety-nine-test
       test
   default-extensions:
       TupleSections
-  ghc-options: -Werror -Weverything -Wno-missing-import-lists -Wno-missed-specializations -Wno-all-missed-specializations -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-safe-haskell-mode -Wno-safe -Wno-unsafe -Wno-implicit-prelude -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-unused-top-binds -Wno-missing-export-lists
+  ghc-options: -Werror -Weverything -Wno-missing-import-lists -Wno-missed-specializations -Wno-all-missed-specializations -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-safe-haskell-mode -Wno-safe -Wno-unsafe -Wno-implicit-prelude -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-unused-top-binds -Wno-missing-export-lists -Wno-missing-role-annotations -Wno-x-partial
   build-depends:
       QuickCheck
-    , base >=4.7 && <5
+    , base >4 && <5
     , containers
     , hspec ==2.*
     , ninety-nine-haskell

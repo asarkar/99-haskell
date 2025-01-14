@@ -1,6 +1,5 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE RecordWildCards #-}
 
 module Graphs
@@ -274,24 +273,28 @@ iso v1 e1 v2 e2 = m == n && go 0 0 (map (,0) v1) (map (,0) v2) 1
     n = length v2
 
     -- Finds old label.
-    -- RankNTypes needs to be enabled to use forall.
-    label :: forall a. (Eq a) => [(a, Int)] -> a -> Int
+    label :: (Eq a) => [(a, Int)] -> a -> Int
     label cl = Mb.fromJust . flip L.lookup cl
     -- Given the neighbors and their compressed labels,
     -- computes new uncompressed label for this vertex.
+    uncompress :: (Eq a) => [(a, Int)] -> [a] -> [Int]
     uncompress cl = L.sort . map (label cl)
     -- Groups uncompressed labels, and
     -- assigns a label to each group.
+    group :: [(Int, [Int])] -> Int -> [((Int, [Int]), (Int, Int))]
     group ucl labelId =
       zipWith
         (\xs k -> (head xs, (length xs, k)))
         (L.group $ L.sort ucl)
         [labelId + 1 ..]
     -- Replaces each uncompressed group with its compressed label.
+    compress :: [(Int, [Int])] -> [((Int, [Int]), (Int, Int))] -> [Int]
     compress ucl groups = map (snd . Mb.fromJust . flip L.lookup groups) ucl
     -- Reduces the graph into canonical form.
+    canonical :: [((Int, [Int]), (Int, Int))] -> [(Int, Int)]
     canonical = L.sortOn fst . map (\(_, (x, y)) -> (y, x))
 
+    -- go :: Int -> Int -> [(a, Int)] -> [(b, Int)] -> Int -> Bool
     go i labelId cl1 cl2 numLabels
       | i == n = False
       | otherwise = do

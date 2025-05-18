@@ -35,9 +35,24 @@ library
       Arithmetic.P43
       Arithmetic.P44
       Arithmetic.P45
-      BinaryTree
-      BinaryTrees
-      BinaryTrees2
+      BinaryTree.BinaryTree
+      BinaryTree.P55
+      BinaryTree.P56
+      BinaryTree.P57
+      BinaryTree.P58
+      BinaryTree.P59
+      BinaryTree.P60
+      BinaryTree.P61
+      BinaryTree.P61a
+      BinaryTree.P62
+      BinaryTree.P62b
+      BinaryTree.P63
+      BinaryTree.P64
+      BinaryTree.P65
+      BinaryTree.P66
+      BinaryTree.P67a
+      BinaryTree.P68
+      BinaryTree.P69
       DList
       Graphs
       List.P01
@@ -116,10 +131,24 @@ test-suite ninety-nine-test
       Arithmetic.P40Spec
       Arithmetic.P41Spec
       Arithmetic.P42Spec
-      BinaryTrees2Spec
-      BinaryTreeSpec
-      BinaryTreesSpec
-      GenBinaryTree
+      BinaryTree.BinaryTreeSpec
+      BinaryTree.GenBinaryTree
+      BinaryTree.P55Spec
+      BinaryTree.P56Spec
+      BinaryTree.P57Spec
+      BinaryTree.P58Spec
+      BinaryTree.P59Spec
+      BinaryTree.P61aSpec
+      BinaryTree.P61Spec
+      BinaryTree.P62bSpec
+      BinaryTree.P62Spec
+      BinaryTree.P63Spec
+      BinaryTree.P64Spec
+      BinaryTree.P65Spec
+      BinaryTree.P67aSpec
+      BinaryTree.P68Spec
+      BinaryTree.P69Spec
+      BinaryTree.Trees
       GenMultiwayTree
       GraphsSpec
       List.GenList

@@ -2,9 +2,9 @@
 -- Arbitrary (Tree a) will be supplied in due time.
 {-# LANGUAGE FlexibleContexts #-}
 
-module GenBinaryTree where
+module BinaryTree.GenBinaryTree where
 
-import BinaryTree (Tree (..))
+import BinaryTree.BinaryTree (Tree (..))
 import Test.QuickCheck
 
 -- https://www.dcc.fc.up.pt/~pbv/aulas/tapf/handouts/quickcheck.html

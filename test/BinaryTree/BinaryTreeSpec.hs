@@ -3,10 +3,10 @@
 -- where Char is not a type variable.
 {-# LANGUAGE FlexibleInstances #-}
 
-module BinaryTreeSpec (spec) where
+module BinaryTree.BinaryTreeSpec (spec) where
 
-import BinaryTree (Tree (..), fromList, toList)
-import GenBinaryTree
+import BinaryTree.BinaryTree (Tree (..), fromList, toList)
+import BinaryTree.GenBinaryTree
 import Test.Hspec
 import Test.QuickCheck
 

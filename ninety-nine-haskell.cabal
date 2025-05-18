@@ -40,9 +40,38 @@ library
       BinaryTrees2
       DList
       Graphs
-      Lists
-      Lists2
-      Lists3
+      List.P01
+      List.P02
+      List.P03
+      List.P04
+      List.P05
+      List.P06
+      List.P07
+      List.P08
+      List.P09
+      List.P10
+      List.P11
+      List.P12
+      List.P13
+      List.P14
+      List.P15
+      List.P16
+      List.P17
+      List.P18
+      List.P19
+      List.P20
+      List.P21
+      List.P22
+      List.P23
+      List.P24
+      List.P25
+      List.P26
+      List.P27a
+      List.P27b
+      List.P28a
+      List.P28b
+      List.P29
+      List.P30
       Logic
       Misc.Calculator
       Misc.P90
@@ -91,12 +120,37 @@ test-suite ninety-nine-test
       BinaryTreeSpec
       BinaryTreesSpec
       GenBinaryTree
-      GenList
       GenMultiwayTree
       GraphsSpec
-      Lists2Spec
-      Lists3Spec
-      ListsSpec
+      List.GenList
+      List.P01Spec
+      List.P02Spec
+      List.P03Spec
+      List.P04Spec
+      List.P05Spec
+      List.P06Spec
+      List.P07Spec
+      List.P08Spec
+      List.P09Spec
+      List.P10Spec
+      List.P11Spec
+      List.P14Spec
+      List.P16Spec
+      List.P17Spec
+      List.P18Spec
+      List.P19Spec
+      List.P20Spec
+      List.P21Spec
+      List.P22Spec
+      List.P23Spec
+      List.P24Spec
+      List.P25Spec
+      List.P26Spec
+      List.P27bSpec
+      List.P28aSpec
+      List.P28bSpec
+      List.P29Spec
+      List.P30Spec
       LogicSpec
       Misc.CalculatorSpec
       Misc.P90Spec

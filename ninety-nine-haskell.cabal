@@ -95,7 +95,13 @@ library
       Misc.P93
       Misc2
       Monads
-      MultiwayTrees
+      MultiwayTree.MultiwayTree
+      MultiwayTree.P70
+      MultiwayTree.P70b
+      MultiwayTree.P70c
+      MultiwayTree.P71
+      MultiwayTree.P72
+      MultiwayTree.P73
       Parser
   other-modules:
       Paths_ninety_nine_haskell
@@ -149,7 +155,6 @@ test-suite ninety-nine-test
       BinaryTree.P68Spec
       BinaryTree.P69Spec
       BinaryTree.Trees
-      GenMultiwayTree
       GraphsSpec
       List.GenList
       List.P01Spec
@@ -188,7 +193,13 @@ test-suite ninety-nine-test
       Misc.P93Spec
       Misc2Spec
       MonadsSpec
-      MultiwayTreesSpec
+      MultiwayTree.GenMultiwayTree
+      MultiwayTree.P70cSpec
+      MultiwayTree.P70Spec
+      MultiwayTree.P71Spec
+      MultiwayTree.P72Spec
+      MultiwayTree.P73Spec
+      MultiwayTree.Trees
       SpecHook
       Paths_ninety_nine_haskell
   hs-source-dirs:

@@ -2,9 +2,9 @@
 -- Arbitrary (Tree a) will be supplied in due time.
 {-# LANGUAGE FlexibleContexts #-}
 
-module GenMultiwayTree where
+module MultiwayTree.GenMultiwayTree where
 
-import MultiwayTrees (Tree (..))
+import MultiwayTree.MultiwayTree (Tree (..))
 import Test.QuickCheck
 
 genTree :: Gen a -> Int -> Gen (Tree a)

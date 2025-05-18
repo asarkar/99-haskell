@@ -1,6 +1,6 @@
-module List.P27bSpec (spec) where
+module List.P27Spec (spec) where
 
-import List.P27b
+import List.P27
 import Test.Hspec
 
 spec :: Spec

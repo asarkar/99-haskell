@@ -2,9 +2,6 @@ module BinaryTree.P55 (cbalTree) where
 
 import BinaryTree.BinaryTree (Tree (..))
 
--- Problem 54A: (*) Check whether a given term represents a binary tree.
--- ANSWER: Creating an invalid tree is not possible in Haskell.
-
 {-
 Problem 55: (**) Construct completely balanced binary trees.
 

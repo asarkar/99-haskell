@@ -1,4 +1,4 @@
-module List.P23 where
+module List.P23 (rndSelect) where
 
 import qualified Control.Monad as M
 import Data.Functor ((<&>))

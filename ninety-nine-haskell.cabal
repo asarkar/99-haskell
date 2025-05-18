@@ -36,6 +36,7 @@ library
       Arithmetic.P44
       Arithmetic.P45
       BinaryTree.BinaryTree
+      BinaryTree.P54a
       BinaryTree.P55
       BinaryTree.P56
       BinaryTree.P57
@@ -92,10 +93,8 @@ library
       List.P24
       List.P25
       List.P26
-      List.P27a
-      List.P27b
-      List.P28a
-      List.P28b
+      List.P27
+      List.P28
       List.P29
       List.P30
       Logic.Logic
@@ -112,6 +111,7 @@ library
       Misc.P91
       Misc.P92
       Misc.P93
+      Misc.P94
       Misc.P95
       Misc.P96
       Misc.P97
@@ -216,9 +216,8 @@ test-suite ninety-nine-test
       List.P24Spec
       List.P25Spec
       List.P26Spec
-      List.P27bSpec
-      List.P28aSpec
-      List.P28bSpec
+      List.P27Spec
+      List.P28Spec
       List.P29Spec
       List.P30Spec
       Logic.LogicSpec

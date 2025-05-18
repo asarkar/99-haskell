@@ -20,7 +20,21 @@ extra-source-files:
 
 library
   exposed-modules:
-      Arithmetic
+      Arithmetic.P31
+      Arithmetic.P32
+      Arithmetic.P33
+      Arithmetic.P34
+      Arithmetic.P35
+      Arithmetic.P36
+      Arithmetic.P37
+      Arithmetic.P38
+      Arithmetic.P39
+      Arithmetic.P40
+      Arithmetic.P41
+      Arithmetic.P42
+      Arithmetic.P43
+      Arithmetic.P44
+      Arithmetic.P45
       BinaryTree
       BinaryTrees
       BinaryTrees2
@@ -63,7 +77,16 @@ test-suite ninety-nine-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      ArithmeticSpec
+      Arithmetic.P31Spec
+      Arithmetic.P32Spec
+      Arithmetic.P33Spec
+      Arithmetic.P34Spec
+      Arithmetic.P35Spec
+      Arithmetic.P36Spec
+      Arithmetic.P39Spec
+      Arithmetic.P40Spec
+      Arithmetic.P41Spec
+      Arithmetic.P42Spec
       BinaryTrees2Spec
       BinaryTreeSpec
       BinaryTreesSpec

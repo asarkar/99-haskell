@@ -87,7 +87,15 @@ library
       List.P28b
       List.P29
       List.P30
-      Logic
+      Logic.Logic
+      Logic.P46
+      Logic.P47
+      Logic.P48
+      Logic.P49
+      Logic.P50
+      Logic.P51
+      Logic.P52
+      Logic.P53
       Misc.Calculator
       Misc.P90
       Misc.P91
@@ -185,7 +193,11 @@ test-suite ninety-nine-test
       List.P28bSpec
       List.P29Spec
       List.P30Spec
-      LogicSpec
+      Logic.LogicSpec
+      Logic.P46Spec
+      Logic.P48Spec
+      Logic.P49Spec
+      Logic.P50Spec
       Misc.CalculatorSpec
       Misc.P90Spec
       Misc.P91Spec

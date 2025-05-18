@@ -1,108 +1,15 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Monads
-  ( Operator (..),
-    Element (..),
-    randomWalkPaths,
-    collatz,
-    calculatePostfix,
-  )
-where
+module Monad.P79 (calculatePostfix, Operator (..), Element (..)) where
 
 import qualified Control.Monad as M
 import Control.Monad.State (MonadState, State)
 import qualified Control.Monad.State as S
 import Control.Monad.Trans.Maybe (MaybeT)
 import qualified Control.Monad.Trans.Maybe as Mb
-import Control.Monad.Writer.Strict (MonadWriter, Writer, WriterT)
+import Control.Monad.Writer.Strict (MonadWriter, WriterT)
 import qualified Control.Monad.Writer.Strict as W
-import Data.Monoid (Sum (..))
-import qualified Data.Monoid as Md
-
-{-
-Problem 74: (**) Monads without do notation.
-
-We would like to implement a function which reads an even number from standard input,
-finds two prime numbers which add up to the number (see Problem 40), and prints out the
-equation to standard output.
-
-Implement the function without do notation. In other words, use >>= or >> directly,
-instead of using them implicitly through do notation.
-Try to use these functions with prefix style instead of infix style.
--}
-
-{-
-Problem 75: (*) Maybe monad.
-
-In Problem 74, askGoldbach could not output an error if the input was not a number
-or it was not an even number greater than 2. We could implement a function which
-returned Nothing when the input is not valid.
-
-However, the implementation of maybeGoldbach above is a chain of conditional expressions.
-It is not problematic in this particular case, but can make things awkward when there are
-many conditions and successful operations that need to happen for a function to return a
-Maybe value.
-
-Take advantage of the fact that Maybe is a monad and rewrite maybeGoldbach more succintly
-using do notation. The guard function, which in the Maybe monad returns Just () when its
-argument is true and Nothing when its argument is false, would be useful for making it
-even more succinct.
--}
-
-{-
-Problem 76: (*) Either monad.
-
-In Problem 75, maybeGoldbach returned Nothing when there is an error. However, this revealed
-nothing about why there is an error.
-
-Rewrite maybeGoldbach to return an Either value,
--}
-
-{-
-Problem 77: (*) List monad.
-
-Using the list monad, implement a function which returns all the one-dimensional random walk
-paths with n steps. Starting from position 0, each step can change positions by -1, 0, or 1.
-Each path will be a list of positions starting from 0.
-
-ANSWER:
-ReplicateM creates the cross-product of the given list n times.
-
-Example:
-  n=2, [[-1,-1], [-1,0], [-1,1], [0,-1], [0,0], [0,1], [1,-1], [1,0], [1,1]].
-  Each of these represents the next step taken, so [-1,-1] means 2 steps from 0,
-  0, -1 and -1. The position at each step is given by the sum of itself with
-  the previous position, i.e. the cumulative sum.
-  So, 0, -1 and -1 ==> 0, -1, -2.
--}
-
-randomWalkPaths :: Int -> [[Int]]
-randomWalkPaths 0 = [[0]]
-randomWalkPaths n = map (scanl (+) 0) $ M.replicateM n [-1, 0, 1]
-
-{-
-Problem 78: (*) Collatz conjecture.
-
-Starting from a positive integer n, we can have a sequence of numbers such that at each step,
-the next number is 3n + 1 if n  is odd, or n/2 if n is even. The Collatz conjecture states
-that this sequence will always end at 1 after a finite number of steps.
-
-Using the Writer monad, count the number of these steps for a given positive integer n.
--}
-
-collatz :: Int -> Int
-collatz = Md.getSum . W.execWriter . go
-  where
-    -- Writer w a, combines w using
-    -- a Monoid instance for w.
-    go :: Int -> Writer (Sum Int) ()
-    go 1 = return ()
-    go n = do
-      W.tell 1
-      if even n
-        then go (n `div` 2)
-        else go (3 * n + 1)
 
 {-
 Problem 79: (**) Postfix notation.

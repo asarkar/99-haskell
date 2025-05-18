@@ -1,8 +1,8 @@
-module MonadsSpec (spec) where
+module Monad.P79Spec (spec) where
 
 import qualified Control.Monad as M
 import qualified Data.Char as C
-import Monads
+import Monad.P79
 import Test.Hspec
 
 parsePostfix :: String -> [Element]
@@ -21,26 +21,6 @@ parseToken x
 
 spec :: Spec
 spec = do
-  describe "randomWalkPaths" $ do
-    it "returns all 1D random walk paths with n steps" $ do
-      randomWalkPaths 0 `shouldBe` [[0]]
-      randomWalkPaths 2
-        `shouldMatchList` [ [0, -1, -2],
-                            [0, -1, -1],
-                            [0, -1, 0],
-                            [0, 0, -1],
-                            [0, 0, 0],
-                            [0, 0, 1],
-                            [0, 1, 0],
-                            [0, 1, 1],
-                            [0, 1, 2]
-                          ]
-  describe "collatz" $ do
-    it "counts the number of steps in the Collatz sequence" $ do
-      collatz 1 `shouldBe` 0
-      collatz 2 `shouldBe` 1
-      collatz 31 `shouldBe` 106
-
   describe "calculatePostfix" $ do
     it "evaluates an expression in postfix notation" $ do
       let xs =

@@ -54,7 +54,18 @@ library
       BinaryTree.P68
       BinaryTree.P69
       DList
-      Graphs
+      Graph.Graph
+      Graph.P80
+      Graph.P81
+      Graph.P82
+      Graph.P83
+      Graph.P84
+      Graph.P85
+      Graph.P86
+      Graph.P87
+      Graph.P88
+      Graph.P89
+      Graph.Search
       List.P01
       List.P02
       List.P03
@@ -102,7 +113,12 @@ library
       Misc.P92
       Misc.P93
       Misc2
-      Monads
+      Monad.P74
+      Monad.P75
+      Monad.P76
+      Monad.P77
+      Monad.P78
+      Monad.P79
       MultiwayTree.MultiwayTree
       MultiwayTree.P70
       MultiwayTree.P70b
@@ -163,7 +179,15 @@ test-suite ninety-nine-test
       BinaryTree.P68Spec
       BinaryTree.P69Spec
       BinaryTree.Trees
-      GraphsSpec
+      Graph.P81Spec
+      Graph.P82Spec
+      Graph.P83Spec
+      Graph.P84Spec
+      Graph.P85Spec
+      Graph.P86Spec
+      Graph.P87Spec
+      Graph.P88Spec
+      Graph.P89Spec
       List.GenList
       List.P01Spec
       List.P02Spec
@@ -204,7 +228,9 @@ test-suite ninety-nine-test
       Misc.P92Spec
       Misc.P93Spec
       Misc2Spec
-      MonadsSpec
+      Monad.P77Spec
+      Monad.P78Spec
+      Monad.P79Spec
       MultiwayTree.GenMultiwayTree
       MultiwayTree.P70cSpec
       MultiwayTree.P70Spec

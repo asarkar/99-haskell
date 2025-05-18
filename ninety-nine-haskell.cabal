@@ -112,7 +112,11 @@ library
       Misc.P91
       Misc.P92
       Misc.P93
-      Misc2
+      Misc.P95
+      Misc.P96
+      Misc.P97
+      Misc.P98
+      Misc.P99
       Monad.P74
       Monad.P75
       Monad.P76
@@ -227,7 +231,10 @@ test-suite ninety-nine-test
       Misc.P91Spec
       Misc.P92Spec
       Misc.P93Spec
-      Misc2Spec
+      Misc.P95Spec
+      Misc.P96Spec
+      Misc.P97Spec
+      Misc.P99Spec
       Monad.P77Spec
       Monad.P78Spec
       Monad.P79Spec

@@ -17,7 +17,7 @@ jobs:
         uses: haskell-actions/hlint-setup@v2
 
       - name: 'Check Formatting'
-        uses: haskell-actions/run-ormolu@v16
+        uses: haskell-actions/run-ormolu@v17
         with:
           mode: check
 

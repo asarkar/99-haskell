@@ -4,7 +4,7 @@ version:             0.1.0.0
 homepage:            https://github.com/asarkar/99-haskell#readme
 license:             "Apache-2.0"
 author:              "Abhijit Sarkar"
-copyright:           "2024 Abhijit Sarkar"
+copyright:           "© 2023-present Abhijit Sarkar"
 
 extra-source-files:
 - README.md
@@ -66,3 +66,4 @@ tests:
     dependencies:
     - ninety-nine-haskell
     - QuickCheck
+    - hspec-expectations

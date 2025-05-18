@@ -10,7 +10,7 @@ description:    Please see the README on GitHub at <https://github.com/asarkar/9
 homepage:       https://github.com/asarkar/99-haskell#readme
 author:         Abhijit Sarkar
 maintainer:     Abhijit Sarkar
-copyright:      2024 Abhijit Sarkar
+copyright:      © 2023-present Abhijit Sarkar
 license:        Apache-2.0
 license-file:   LICENSE
 build-type:     Simple
@@ -30,7 +30,11 @@ library
       Lists2
       Lists3
       Logic
-      Misc
+      Misc.Calculator
+      Misc.P90
+      Misc.P91
+      Misc.P92
+      Misc.P93
       Misc2
       Monads
       MultiwayTrees
@@ -71,8 +75,12 @@ test-suite ninety-nine-test
       Lists3Spec
       ListsSpec
       LogicSpec
+      Misc.CalculatorSpec
+      Misc.P90Spec
+      Misc.P91Spec
+      Misc.P92Spec
+      Misc.P93Spec
       Misc2Spec
-      MiscSpec
       MonadsSpec
       MultiwayTreesSpec
       SpecHook
@@ -87,6 +95,7 @@ test-suite ninety-nine-test
     , base >4 && <5
     , containers
     , hspec ==2.*
+    , hspec-expectations
     , ninety-nine-haskell
     , split
   default-language: Haskell2010

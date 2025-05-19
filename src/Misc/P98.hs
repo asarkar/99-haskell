@@ -30,4 +30,5 @@ _at least_ one space, then another 'X'.
 The numbers at the bottom are the constraints for the corresponding columns.
 
 ANSWER: TODO.
+https://activityworkshop.net/puzzlesgames/nonograms/tutorial.html
 -}

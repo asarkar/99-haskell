@@ -1,7 +1,7 @@
 module BinaryTree.P68Spec (spec) where
 
 import BinaryTree.BinaryTree (fromList)
-import BinaryTree.P67a
+import BinaryTree.P67A
 import BinaryTree.P68
 import Test.Hspec
 

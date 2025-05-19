@@ -1,7 +1,7 @@
-module MultiwayTree.P70cSpec (spec) where
+module MultiwayTree.P70CSpec (spec) where
 
 import MultiwayTree.MultiwayTree (Tree (..))
-import MultiwayTree.P70c
+import MultiwayTree.P70C
 import MultiwayTree.Trees
 import Test.Hspec
 

@@ -135,11 +135,11 @@ P54A omitted; our tree representation will only allow well-formed trees.
 
 [P61](src/BinaryTree/P61.hs) (*) Count the leaves of a binary tree.
 
-[P61A](src/BinaryTree/P61a.hs) (*) Collect the leaves of a binary tree in a list.
+[P61A](src/BinaryTree/P61A.hs) (*) Collect the leaves of a binary tree in a list.
 
 [P62](src/BinaryTree/P62.hs) (*) Collect the internal nodes of a binary tree in a list.
 
-[P62B](src/BinaryTree/P62b.hs) (*) Collect the nodes at a given level in a list.
+[P62B](src/BinaryTree/P62B.hs) (*) Collect the nodes at a given level in a list.
 
 [P63](src/BinaryTree/P63.hs) (**) Construct a complete binary tree.
 
@@ -149,7 +149,7 @@ P54A omitted; our tree representation will only allow well-formed trees.
 
 [P66](src/BinaryTree/P66.hs) (***) Layout a binary tree (3).
 
-[P67A](src/BinaryTree/P67a.hs) (**) A string representation of binary trees.
+[P67A](src/BinaryTree/P67A.hs) (**) A string representation of binary trees.
 
 [P68](src/BinaryTree/P68.hs) (**) Preorder and inorder sequences of binary trees.
 
@@ -159,7 +159,7 @@ P54A omitted; our tree representation will only allow well-formed trees.
 
 P70B omitted; we can only create well-formed trees.
 
-[P70C](src/MultiwayTree/P70c.hs) (*) Count the nodes of a multiway tree.
+[P70C](src/MultiwayTree/P70C.hs) (*) Count the nodes of a multiway tree.
 
 [P70](src/MultiwayTree/P70.hs) (**) Tree construction from a node string.
 

@@ -1,6 +1,6 @@
-module BinaryTree.P62bSpec (spec) where
+module BinaryTree.P62BSpec (spec) where
 
-import BinaryTree.P62b
+import BinaryTree.P62B
 import BinaryTree.Trees
 import Test.Hspec
 

@@ -1,4 +1,4 @@
-module BinaryTree.P67a (stringToTree, treeToString) where
+module BinaryTree.P67A (stringToTree, treeToString) where
 
 import BinaryTree.BinaryTree (Tree (..))
 import Control.Applicative ((<|>))

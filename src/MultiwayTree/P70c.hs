@@ -1,6 +1,6 @@
 {-# LANGUAGE DerivingStrategies #-}
 
-module MultiwayTree.P70c where
+module MultiwayTree.P70C where
 
 import MultiwayTree.MultiwayTree (Tree (..))
 

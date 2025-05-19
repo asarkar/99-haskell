@@ -36,7 +36,7 @@ library
       Arithmetic.P44
       Arithmetic.P45
       BinaryTree.BinaryTree
-      BinaryTree.P54a
+      BinaryTree.P54A
       BinaryTree.P55
       BinaryTree.P56
       BinaryTree.P57
@@ -44,14 +44,14 @@ library
       BinaryTree.P59
       BinaryTree.P60
       BinaryTree.P61
-      BinaryTree.P61a
+      BinaryTree.P61A
       BinaryTree.P62
-      BinaryTree.P62b
+      BinaryTree.P62B
       BinaryTree.P63
       BinaryTree.P64
       BinaryTree.P65
       BinaryTree.P66
-      BinaryTree.P67a
+      BinaryTree.P67A
       BinaryTree.P68
       BinaryTree.P69
       DList
@@ -125,8 +125,8 @@ library
       Monad.P79
       MultiwayTree.MultiwayTree
       MultiwayTree.P70
-      MultiwayTree.P70b
-      MultiwayTree.P70c
+      MultiwayTree.P70B
+      MultiwayTree.P70C
       MultiwayTree.P71
       MultiwayTree.P72
       MultiwayTree.P73
@@ -172,14 +172,14 @@ test-suite ninety-nine-test
       BinaryTree.P57Spec
       BinaryTree.P58Spec
       BinaryTree.P59Spec
-      BinaryTree.P61aSpec
+      BinaryTree.P61ASpec
       BinaryTree.P61Spec
-      BinaryTree.P62bSpec
+      BinaryTree.P62BSpec
       BinaryTree.P62Spec
       BinaryTree.P63Spec
       BinaryTree.P64Spec
       BinaryTree.P65Spec
-      BinaryTree.P67aSpec
+      BinaryTree.P67ASpec
       BinaryTree.P68Spec
       BinaryTree.P69Spec
       BinaryTree.Trees
@@ -238,7 +238,7 @@ test-suite ninety-nine-test
       Monad.P78Spec
       Monad.P79Spec
       MultiwayTree.GenMultiwayTree
-      MultiwayTree.P70cSpec
+      MultiwayTree.P70CSpec
       MultiwayTree.P70Spec
       MultiwayTree.P71Spec
       MultiwayTree.P72Spec

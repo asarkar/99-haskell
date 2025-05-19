@@ -1,4 +1,4 @@
-module BinaryTree.P62b where
+module BinaryTree.P62B where
 
 import BinaryTree.BinaryTree (Tree (..))
 
